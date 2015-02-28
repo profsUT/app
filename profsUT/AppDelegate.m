@@ -1,5 +1,9 @@
 #import "AppDelegate.h"
 
+#import "FeedVC.h"
+#import "Constants.h"
+#import "UIColor+profsUT.h"
+
 @interface AppDelegate ()
 
 @end
@@ -10,6 +14,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];
+  
+  FeedVC *feedVC = [[FeedVC alloc] init];
+  UINavigationController *navController =
+      [[UINavigationController alloc] initWithRootViewController:feedVC];
+  UINavigationBar *navBar = navController.navigationBar;
+  navBar.barTintColor = [UIColor burntOrangeColor];
+  navBar.tintColor = [UIColor whiteColor];
+  navBar.translucent = NO;
+  navBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                                 NSFontAttributeName:[UIFont fontWithName:@"Copse" size:kNavFontSize]};
+  self.window.rootViewController = navController;
+  
   [self.window makeKeyAndVisible];
   return YES;
 }
