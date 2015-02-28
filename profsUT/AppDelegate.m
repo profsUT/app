@@ -1,11 +1,3 @@
-//
-//  AppDelegate.m
-//  profsUT
-//
-//  Created by Kobe on 2/28/15.
-//  Copyright (c) 2015 Teacher's Pet. All rights reserved.
-//
-
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -16,7 +8,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  // Override point for customization after application launch.
+  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  self.window.backgroundColor = [UIColor whiteColor];
+  [self.window makeKeyAndVisible];
   return YES;
 }
 
