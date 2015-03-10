@@ -7,15 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF341AAED392006D08EB /* FeedVC.m */; };
+		CD1FFF491AAED392006D08EB /* Professor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF391AAED392006D08EB /* Professor.m */; };
+		CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */ = {isa = PBXBuildFile; fileRef = CD1FFF3C1AAED392006D08EB /* sample.mov */; };
+		CD1FFF4F1AAED392006D08EB /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF421AAED392006D08EB /* Util.m */; };
 		CD251C661AA258850062E2BC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD251C651AA258850062E2BC /* Default-568h@2x.png */; };
-		CD251C691AA25AEB0062E2BC /* FeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CD251C681AA25AEB0062E2BC /* FeedVC.m */; };
 		CD251C6C1AA25AFF0062E2BC /* ProfVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CD251C6B1AA25AFF0062E2BC /* ProfVC.m */; };
 		CD251C7A1AA261170062E2BC /* UIColor+profsUT.m in Sources */ = {isa = PBXBuildFile; fileRef = CD251C791AA261170062E2BC /* UIColor+profsUT.m */; };
 		CD251C7D1AA2675C0062E2BC /* Copse.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD251C7C1AA263210062E2BC /* Copse.ttf */; };
 		CD251C801AA268640062E2BC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CD251C7F1AA268640062E2BC /* Constants.m */; };
 		CD251C831AA26C5F0062E2BC /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = CD251C811AA26C5F0062E2BC /* search.png */; };
 		CD251C841AA26C5F0062E2BC /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CD251C821AA26C5F0062E2BC /* settings.png */; };
-		CD251C8A1AA273880062E2BC /* ProfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD251C891AA273880062E2BC /* ProfCell.m */; };
 		CD8074131AA25423007E334A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8074121AA25423007E334A /* main.m */; };
 		CD8074161AA25423007E334A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8074151AA25423007E334A /* AppDelegate.m */; };
 		CD80741E1AA25423007E334A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD80741D1AA25423007E334A /* Images.xcassets */; };
@@ -33,9 +35,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD1FFF331AAED392006D08EB /* FeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedVC.h; sourceTree = "<group>"; };
+		CD1FFF341AAED392006D08EB /* FeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedVC.m; sourceTree = "<group>"; };
+		CD1FFF381AAED392006D08EB /* Professor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Professor.h; sourceTree = "<group>"; };
+		CD1FFF391AAED392006D08EB /* Professor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Professor.m; sourceTree = "<group>"; };
+		CD1FFF3C1AAED392006D08EB /* sample.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sample.mov; sourceTree = "<group>"; };
+		CD1FFF411AAED392006D08EB /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		CD1FFF421AAED392006D08EB /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		CD251C651AA258850062E2BC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
-		CD251C671AA25AEB0062E2BC /* FeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedVC.h; path = ../FeedVC.h; sourceTree = "<group>"; };
-		CD251C681AA25AEB0062E2BC /* FeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedVC.m; path = ../FeedVC.m; sourceTree = "<group>"; };
 		CD251C6A1AA25AFF0062E2BC /* ProfVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfVC.h; sourceTree = "<group>"; };
 		CD251C6B1AA25AFF0062E2BC /* ProfVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfVC.m; sourceTree = "<group>"; };
 		CD251C781AA261170062E2BC /* UIColor+profsUT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+profsUT.h"; sourceTree = "<group>"; };
@@ -45,8 +52,6 @@
 		CD251C7F1AA268640062E2BC /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		CD251C811AA26C5F0062E2BC /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		CD251C821AA26C5F0062E2BC /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
-		CD251C881AA273880062E2BC /* ProfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfCell.h; sourceTree = "<group>"; };
-		CD251C891AA273880062E2BC /* ProfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfCell.m; sourceTree = "<group>"; };
 		CD80740D1AA25423007E334A /* profsUT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = profsUT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD8074111AA25423007E334A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD8074121AA25423007E334A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -79,6 +84,8 @@
 		CD251C711AA2607F0062E2BC /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				CD1FFF411AAED392006D08EB /* Util.h */,
+				CD1FFF421AAED392006D08EB /* Util.m */,
 				CD251C7E1AA268640062E2BC /* Constants.h */,
 				CD251C7F1AA268640062E2BC /* Constants.m */,
 				CD251C781AA261170062E2BC /* UIColor+profsUT.h */,
@@ -90,6 +97,7 @@
 		CD251C7B1AA2631B0062E2BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CD1FFF3C1AAED392006D08EB /* sample.mov */,
 				CD251C651AA258850062E2BC /* Default-568h@2x.png */,
 				CD251C7C1AA263210062E2BC /* Copse.ttf */,
 				CD251C811AA26C5F0062E2BC /* search.png */,
@@ -121,12 +129,12 @@
 			children = (
 				CD8074141AA25423007E334A /* AppDelegate.h */,
 				CD8074151AA25423007E334A /* AppDelegate.m */,
-				CD251C671AA25AEB0062E2BC /* FeedVC.h */,
-				CD251C681AA25AEB0062E2BC /* FeedVC.m */,
-				CD251C881AA273880062E2BC /* ProfCell.h */,
-				CD251C891AA273880062E2BC /* ProfCell.m */,
+				CD1FFF331AAED392006D08EB /* FeedVC.h */,
+				CD1FFF341AAED392006D08EB /* FeedVC.m */,
 				CD251C6A1AA25AFF0062E2BC /* ProfVC.h */,
 				CD251C6B1AA25AFF0062E2BC /* ProfVC.m */,
+				CD1FFF381AAED392006D08EB /* Professor.h */,
+				CD1FFF391AAED392006D08EB /* Professor.m */,
 				CD251C7B1AA2631B0062E2BC /* Resources */,
 				CD251C711AA2607F0062E2BC /* Util */,
 				CD80741D1AA25423007E334A /* Images.xcassets */,
@@ -242,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD80741E1AA25423007E334A /* Images.xcassets in Resources */,
+				CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */,
 				CD251C841AA26C5F0062E2BC /* settings.png in Resources */,
 				CD251C7D1AA2675C0062E2BC /* Copse.ttf in Resources */,
 				CD251C661AA258850062E2BC /* Default-568h@2x.png in Resources */,
@@ -263,13 +272,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD251C8A1AA273880062E2BC /* ProfCell.m in Sources */,
-				CD251C691AA25AEB0062E2BC /* FeedVC.m in Sources */,
 				CD8074161AA25423007E334A /* AppDelegate.m in Sources */,
+				CD1FFF491AAED392006D08EB /* Professor.m in Sources */,
 				CD251C7A1AA261170062E2BC /* UIColor+profsUT.m in Sources */,
+				CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */,
 				CD8074131AA25423007E334A /* main.m in Sources */,
 				CD251C6C1AA25AFF0062E2BC /* ProfVC.m in Sources */,
 				CD251C801AA268640062E2BC /* Constants.m in Sources */,
+				CD1FFF4F1AAED392006D08EB /* Util.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
