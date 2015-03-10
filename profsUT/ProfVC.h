@@ -3,6 +3,6 @@
 @interface ProfVC : UIViewController
 
 // designated initializer
-- (instancetype)initWithIndex:(NSInteger)index;
+- (instancetype)initWithDictionary:(NSDictionary *)prof;
 
 @end

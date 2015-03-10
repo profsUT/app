@@ -2,6 +2,7 @@
 
 #import "Professor.h"
 #import "ProfVC.h"
+#import "Util.h"
 
 static NSString *kCellIdentifier = @"Cell Identifier";
 
@@ -20,6 +21,11 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(refresh)
+                                               name:@"NSURLConnectionDidFinish"
+                                             object:nil];
   
   self.view.backgroundColor = [UIColor whiteColor];
   
@@ -34,22 +40,21 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   _tableView.dataSource = self;
   _tableView.delegate = self;
   _tableView.showsVerticalScrollIndicator = NO;
+  _tableView.contentInset = UIEdgeInsetsMake(0,
+                                             0,
+                                             self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height,
+                                             0);
   [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
-  _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   [self.view addSubview:_tableView];
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  ProfVC *profVC = [[ProfVC alloc] initWithIndex:indexPath.item];
+  NSDictionary *prof = _professor.profsArray[indexPath.item];
+  ProfVC *profVC = [[ProfVC alloc] initWithDictionary:prof];
   [self.navigationController pushViewController:profVC animated:YES];
   [_tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
-
-//- (void)handleTapGesture:(UITapGestureRecognizer *)tap {
-//  ProfVC *profVC = [[ProfVC alloc] init];
-//  [self.navigationController pushViewController:profVC animated:YES];
-//}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -60,9 +65,17 @@ static NSString *kCellIdentifier = @"Cell Identifier";
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
   
-  cell.textLabel.text = _professor.profsArray[indexPath.item];
+  NSDictionary *prof = _professor.profsArray[indexPath.item];
+  NSString *first = prof[@"first"];
+  NSString *last = [Util intoLowerCaseExceptForFirstLetter:prof[@"last"]];
+  cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", last, first];
   
   return cell;
+}
+
+#pragma mark - NSURLConnectionDidFinish
+- (void)refresh {
+  [_tableView reloadData];
 }
 
 @end
