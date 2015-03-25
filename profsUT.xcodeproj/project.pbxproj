@@ -22,6 +22,8 @@
 		CD8074161AA25423007E334A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8074151AA25423007E334A /* AppDelegate.m */; };
 		CD80741E1AA25423007E334A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD80741D1AA25423007E334A /* Images.xcassets */; };
 		CD80742D1AA25423007E334A /* profsUTTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD80742C1AA25423007E334A /* profsUTTests.m */; };
+		CD9E129B1AC278A6004363A6 /* quigley.png in Resources */ = {isa = PBXBuildFile; fileRef = CD9E129A1AC278A6004363A6 /* quigley.png */; };
+		CD9E129E1AC27E96004363A6 /* ProfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9E129D1AC27E96004363A6 /* ProfCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,9 @@
 		CD8074261AA25423007E334A /* profsUTTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = profsUTTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD80742B1AA25423007E334A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD80742C1AA25423007E334A /* profsUTTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = profsUTTests.m; sourceTree = "<group>"; };
+		CD9E129A1AC278A6004363A6 /* quigley.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quigley.png; sourceTree = "<group>"; };
+		CD9E129C1AC27E96004363A6 /* ProfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfCell.h; sourceTree = "<group>"; };
+		CD9E129D1AC27E96004363A6 /* ProfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				CD1FFF3C1AAED392006D08EB /* sample.mov */,
+				CD9E129A1AC278A6004363A6 /* quigley.png */,
 				CD251C651AA258850062E2BC /* Default-568h@2x.png */,
 				CD251C7C1AA263210062E2BC /* Copse.ttf */,
 				CD251C811AA26C5F0062E2BC /* search.png */,
@@ -131,6 +137,8 @@
 				CD8074151AA25423007E334A /* AppDelegate.m */,
 				CD1FFF331AAED392006D08EB /* FeedVC.h */,
 				CD1FFF341AAED392006D08EB /* FeedVC.m */,
+				CD9E129C1AC27E96004363A6 /* ProfCell.h */,
+				CD9E129D1AC27E96004363A6 /* ProfCell.m */,
 				CD251C6A1AA25AFF0062E2BC /* ProfVC.h */,
 				CD251C6B1AA25AFF0062E2BC /* ProfVC.m */,
 				CD1FFF381AAED392006D08EB /* Professor.h */,
@@ -250,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD80741E1AA25423007E334A /* Images.xcassets in Resources */,
+				CD9E129B1AC278A6004363A6 /* quigley.png in Resources */,
 				CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */,
 				CD251C841AA26C5F0062E2BC /* settings.png in Resources */,
 				CD251C7D1AA2675C0062E2BC /* Copse.ttf in Resources */,
@@ -276,6 +285,7 @@
 				CD1FFF491AAED392006D08EB /* Professor.m in Sources */,
 				CD251C7A1AA261170062E2BC /* UIColor+profsUT.m in Sources */,
 				CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */,
+				CD9E129E1AC27E96004363A6 /* ProfCell.m in Sources */,
 				CD8074131AA25423007E334A /* main.m in Sources */,
 				CD251C6C1AA25AFF0062E2BC /* ProfVC.m in Sources */,
 				CD251C801AA268640062E2BC /* Constants.m in Sources */,

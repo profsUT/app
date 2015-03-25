@@ -1,5 +1,6 @@
 #import "FeedVC.h"
 
+#import "ProfCell.h"
 #import "Professor.h"
 #import "ProfVC.h"
 #import "Util.h"
@@ -44,7 +45,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
                                              0,
                                              self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height,
                                              0);
-  [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
+  [_tableView registerClass:[ProfCell class] forCellReuseIdentifier:kCellIdentifier];
   [self.view addSubview:_tableView];
 }
 
@@ -61,14 +62,29 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   return [_professor.profsArray count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return 100.0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+  ProfCell *cell = [_tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
   
   NSDictionary *prof = _professor.profsArray[indexPath.item];
   NSString *first = prof[@"first"];
   NSString *last = [Util intoLowerCaseExceptForFirstLetter:prof[@"last"]];
-  cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", last, first];
+  NSDictionary *courseDict = prof[@"courses"];
+  NSMutableArray *courses = [[NSMutableArray alloc] init];
+  
+  for (NSDictionary *course in courseDict) {
+    NSString *courseID = course[@"courseID"];
+    [courses addObject:courseID];
+  }
+  
+  cell = [[ProfCell alloc] initWithFirstName:first
+                                    lastName:last
+                                     courses:courses
+                                       image:[UIImage imageNamed:@"quigley.png"]];
   
   return cell;
 }
