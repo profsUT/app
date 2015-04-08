@@ -75,9 +75,13 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSString *last = [Util intoLowerCaseExceptForFirstLetter:prof[@"last"]];
   NSDictionary *courseDict = prof[@"courses"];
   NSMutableArray *courses = [[NSMutableArray alloc] init];
+    for(NSString *course in courseDict) {
+        NSLog(@"%@, %@", last, course);
+    }
+
   
-  for (NSDictionary *course in courseDict) {
-    NSString *courseID = course[@"courseID"];
+  for (NSString *course in courseDict) {
+    NSString *courseID = course;
     [courses addObject:courseID];
   }
   

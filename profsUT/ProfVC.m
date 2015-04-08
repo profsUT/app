@@ -28,12 +28,31 @@ static CGFloat sectionBreak = 20.0;
     _first = _prof[@"first"];
     _last = [Util intoLowerCaseExceptForFirstLetter:_prof[@"last"]];
     _courses = _prof[@"courses"];
+    NSLog(@"%@", _courses);
   }
   return self;
 }
 
+- (void)playVideoWithId:(NSString *)videoId {
+    
+    NSString *youTubeVideoHTML = @"<html><head><style>body{margin:0px 0px 0px 0px;}</style></head> <body> <div id=\"player\"></div> <script> var tag = document.createElement('script'); tag.src = 'http://www.youtube.com/player_api'; var firstScriptTag = document.getElementsByTagName('script')[0]; firstScriptTag.parentNode.insertBefore(tag, firstScriptTag); var player; function onYouTubePlayerAPIReady() { player = new YT.Player('player', { width:'300', height:'300', videoId:'OCpSqs6AqoU', events: { 'onReady': onPlayerReady } }); } function onPlayerReady(event) { event.target.playVideo(); } </script> </body> </html>";
+    
+    NSString *html = [NSString stringWithFormat:youTubeVideoHTML, videoId];
+    
+    UIWebView *videoView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
+    videoView.backgroundColor = [UIColor clearColor];
+    videoView.opaque = NO;
+    //videoView.delegate = self;
+    [self.view addSubview:videoView];
+    
+    videoView.mediaPlaybackRequiresUserAction = NO;
+    
+    [videoView loadHTMLString:youTubeVideoHTML baseURL:[[NSBundle mainBundle] resourceURL]];
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
+    [self playVideoWithId:@"sLVGweQU7rQ"];
   
   CGFloat yEdge;
   
@@ -58,14 +77,14 @@ static CGFloat sectionBreak = 20.0;
   
   yEdge += nameLabel.frame.size.height + topPadding;
   
-  NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"mov"];
-  MPMoviePlayerController *player =
-      [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:path]];
-  player.view.frame = CGRectMake(leftPadding, yEdge,
-                                 self.view.bounds.size.width - 30.0, 200);//arbitrary, fix
-  [_scrollView addSubview:player.view];
-  
-  yEdge += player.view.frame.size.height + sectionBreak;
+//  NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"mov"];
+//  MPMoviePlayerController *player =
+//      [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:path]];
+//  player.view.frame = CGRectMake(leftPadding, yEdge,
+//                                 self.view.bounds.size.width - 30.0, 200);//arbitrary, fix
+//  [_scrollView addSubview:player.view];
+//    yEdge += player.view.frame.size.height + sectionBreak;
+    
   
   UILabel *courseLabel = [[UILabel alloc] init];
   courseLabel.text = @"Courses";
@@ -76,12 +95,14 @@ static CGFloat sectionBreak = 20.0;
 
   yEdge += courseLabel.frame.size.height + topPadding;
   
-  for (NSDictionary *course in _courses) {
-    NSString *courseID = course[@"courseID"];
-    NSString *courseName = course[@"courseName"];
+  for (NSString *course in _courses) {
+//    NSString *courseID = course[@"courseID"];
+    NSString *courseID = course;
+    NSString *courseName = @"Intro to stuff";
    
     UILabel *courseIDLabel = [[UILabel alloc] init];
-    courseIDLabel.text = courseID;
+//    courseIDLabel.text = courseID;
+    courseIDLabel.text = [NSString stringWithFormat:@"%@", course];
     courseIDLabel.font = [UIFont fontWithName:@"Helvetica" size:kPFontSize];
     [courseIDLabel sizeToFit];
     courseIDLabel.frame = CGRectMake(15.0, yEdge,

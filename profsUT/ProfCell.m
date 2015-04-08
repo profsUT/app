@@ -22,15 +22,19 @@
     self.courseLabel.font = [UIFont systemFontOfSize:16.0];
 
     NSString *courseString = @"";
+      
     BOOL first = true;
     for (NSString *course in courses) {
-      if (first) {
-        courseString = course;
-        first = FALSE;
-      } else {
-        courseString = [courseString stringByAppendingString:[NSString stringWithFormat:@", %@", course]];
-      }
+//      if (first) {
+//        courseString = course;
+//        first = FALSE;
+//      } else {
+//        courseString = [courseString stringByAppendingString:[NSString stringWithFormat:@", %@", course]];
+//      }
+//        NSLog(@"Zac%@", course);
     }
+      
+    courseString = @"bla";
     self.courseLabel.text = courseString;
     
     self.courseLabel.lineBreakMode = NSLineBreakByWordWrapping;
