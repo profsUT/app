@@ -18,6 +18,8 @@ static CGFloat sectionBreak = 20.0;
   NSString *_first;
   NSString *_last;
   NSArray *_courses;
+  
+  CGFloat yEdge;
 }
 
 - (instancetype)initWithDictionary:(NSDictionary *)prof {
@@ -50,11 +52,50 @@ static CGFloat sectionBreak = 20.0;
     [videoView loadHTMLString:youTubeVideoHTML baseURL:[[NSBundle mainBundle] resourceURL]];
 }
 
+// To-Do Access HLS video from our back-end
+-(void)playVideoFromURL {
+  
+  NSLog(@"Called playVideoFromURL\n");
+  NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"mov"];
+
+  _moviePlayer =  [[MPMoviePlayerController alloc]
+                   initWithContentURL:[NSURL fileURLWithPath:path]];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(moviePlayBackDidFinish:)
+                                               name:MPMoviePlayerPlaybackDidFinishNotification
+                                             object:_moviePlayer];
+  
+  _moviePlayer.view.frame = CGRectMake(leftPadding, yEdge,
+                                  self.view.bounds.size.width - 30.0, 200);
+  _moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
+  _moviePlayer.shouldAutoplay = NO;
+  [self.view addSubview:_moviePlayer.view];
+  [_moviePlayer setFullscreen:YES animated:YES];
+  yEdge += _moviePlayer.view.frame.size.height + sectionBreak;
+}
+
+- (void) moviePlayBackDidFinish:(NSNotification*)notification {
+  MPMoviePlayerController *player = [notification object];
+  [[NSNotificationCenter defaultCenter]
+   removeObserver:self
+   name:MPMoviePlayerPlaybackDidFinishNotification
+   object:player];
+  
+  if ([player
+       respondsToSelector:@selector(setFullscreen:animated:)])
+  {
+//    [player.view removeFromSuperview];
+  }
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
-    [self playVideoWithId:@"sLVGweQU7rQ"];
+  //  [self playVideoWithId:@"sLVGweQU7rQ"];
   
-  CGFloat yEdge;
+  // Position video on view
+  
+//  CGFloat yEdge;
   
   self.view.backgroundColor = [UIColor whiteColor];
   
@@ -77,13 +118,7 @@ static CGFloat sectionBreak = 20.0;
   
   yEdge += nameLabel.frame.size.height + topPadding;
   
-//  NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"mov"];
-//  MPMoviePlayerController *player =
-//      [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:path]];
-//  player.view.frame = CGRectMake(leftPadding, yEdge,
-//                                 self.view.bounds.size.width - 30.0, 200);//arbitrary, fix
-//  [_scrollView addSubview:player.view];
-//    yEdge += player.view.frame.size.height + sectionBreak;
+  [self playVideoFromURL];
     
   
   UILabel *courseLabel = [[UILabel alloc] init];
