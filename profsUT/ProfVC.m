@@ -17,7 +17,7 @@ static CGFloat sectionBreak = 20.0;
   
   NSString *_first;
   NSString *_last;
-  NSArray *_courses;
+  NSMutableArray *_courses;
   
   CGFloat yEdge;
 }
@@ -25,12 +25,24 @@ static CGFloat sectionBreak = 20.0;
 - (instancetype)initWithDictionary:(NSDictionary *)prof {
   self = [super init];
   if (self) {
+    _courses = [[NSMutableArray alloc] init];
     _prof = prof;
     
     _first = _prof[@"first"];
     _last = [Util intoLowerCaseExceptForFirstLetter:_prof[@"last"]];
-    _courses = _prof[@"courses"];
-    NSLog(@"%@", _courses);
+//    _courses = _prof[@"courses"];
+    NSLog(@"%@", _prof[@"courses"][0][@"courseID"]);
+    NSLog(@"Total courses are: %lul", [_prof[@"courses"] count]);
+    unsigned long totalCourses = [_prof[@"courses"] count];
+    for (unsigned long i = 0; i < totalCourses; i++) {
+      NSString *courseID = _prof[@"courses"][i][@"courseID"];
+      NSString *courseName = _prof[@"courses"][i][@"courseName"];
+      NSString *course = [NSString stringWithFormat:@"%@: %@", courseID, courseName];
+      
+      [_courses addObject:course];
+      NSLog(@"%@", course);
+    }
+    
   }
   return self;
 }
@@ -56,10 +68,12 @@ static CGFloat sectionBreak = 20.0;
 -(void)playVideoFromURL {
   
   NSLog(@"Called playVideoFromURL\n");
-  NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"mov"];
-
-  _moviePlayer =  [[MPMoviePlayerController alloc]
-                   initWithContentURL:[NSURL fileURLWithPath:path]];
+//  NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"mov"];
+  NSURL *streamURL = [NSURL URLWithString:@"https://s3.amazonaws.com/django-profs-prod/video/hls/5.m3u8"];
+//  _moviePlayer =  [[MPMoviePlayerController alloc]
+//                   initWithContentURL:[NSURL fileURLWithPath:path]];
+  _moviePlayer = [[MPMoviePlayerController alloc]
+                  initWithContentURL:streamURL];
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(moviePlayBackDidFinish:)
@@ -68,9 +82,9 @@ static CGFloat sectionBreak = 20.0;
   
   _moviePlayer.view.frame = CGRectMake(leftPadding, yEdge,
                                   self.view.bounds.size.width - 30.0, 200);
-  _moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
+  _moviePlayer.controlStyle = MPMovieControlStyleDefault;
   _moviePlayer.shouldAutoplay = NO;
-  [self.view addSubview:_moviePlayer.view];
+  [_scrollView addSubview:_moviePlayer.view];
   [_moviePlayer setFullscreen:YES animated:YES];
   yEdge += _moviePlayer.view.frame.size.height + sectionBreak;
 }
@@ -132,6 +146,7 @@ static CGFloat sectionBreak = 20.0;
   
   for (NSString *course in _courses) {
 //    NSString *courseID = course[@"courseID"];
+    
     NSString *courseID = course;
     NSString *courseName = @"Intro to stuff";
    

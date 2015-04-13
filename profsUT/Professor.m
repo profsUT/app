@@ -9,7 +9,7 @@
   if (self) {
     _responseData = [NSMutableData data];
     NSURLRequest *request =
-        [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8000/profsUT/api/instructors"]];
+        [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.59.103/profsUT/api/instructors/"]];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
   }

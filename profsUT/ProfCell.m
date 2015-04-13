@@ -9,17 +9,17 @@
   self = [super init];
   if (self) {
     self.nameLabel = [[UILabel alloc] init];
-    self.nameLabel.font = [UIFont systemFontOfSize:24.0];
+    self.nameLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:24.0];
     self.nameLabel.text = [NSString stringWithFormat:@"%@, %@", last, first];
     [self.nameLabel sizeToFit];
     self.nameLabel.frame = CGRectMake(100, 50 - self.nameLabel.frame.size.height,
-                                      self.frame.size.width - 100, self.nameLabel.frame.size.height);
+                                      self.frame.size.width - 100, self.nameLabel.frame.size.height+20);
     self.nameLabel.numberOfLines = 0;
 //    self.nameLabel.layer.borderColor = [[UIColor redColor] CGColor];
 //    self.nameLabel.layer.borderWidth = 2.0;
     
     self.courseLabel = [[UILabel alloc] init];
-    self.courseLabel.font = [UIFont systemFontOfSize:16.0];
+    self.courseLabel.font = [UIFont fontWithName:@"Copse" size:16.0];
 
     NSString *courseString = @"";
       
