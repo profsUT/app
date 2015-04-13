@@ -52,7 +52,6 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NSDictionary *prof = _professor.profsArray[indexPath.item];
-  NSLog(@"%@", prof);
   ProfVC *profVC = [[ProfVC alloc] initWithDictionary:prof];
   [self.navigationController pushViewController:profVC animated:YES];
   [_tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -74,12 +73,8 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSDictionary *prof = _professor.profsArray[indexPath.item];
   NSString *first = prof[@"first"];
   NSString *last = [Util intoLowerCaseExceptForFirstLetter:prof[@"last"]];
-  NSDictionary *courseDict = prof[@"courses"];
-  NSDictionary *courseD;
-  NSMutableArray *courses = [[NSMutableArray alloc] init];
-    for(NSString *course in courseDict) {
-        NSLog(@"%@, %@", last, course);
-    }
+  NSDictionary *courseDict;
+
 
   unsigned long totalCourses = [prof[@"courses"] count];
   NSMutableArray *courseIDs = [[NSMutableArray alloc] init];
@@ -88,13 +83,11 @@ static NSString *kCellIdentifier = @"Cell Identifier";
     NSString *courseID = prof[@"courses"][i][@"courseID"];
     NSString *courseName = prof[@"courses"][i][@"courseName"];
     
-    NSLog(@"ZACACAC %@ %@", courseID, courseName);
-    
     [courseIDs addObject:courseID];
     [courseNames addObject:courseName];
   }
   
-  courseD = [NSDictionary dictionaryWithObjects: courseNames forKeys:courseIDs];
+  courseDict = [NSDictionary dictionaryWithObjects: courseNames forKeys:courseIDs];
 
 //  for (NSString *course in courseDict) {
 //    NSString *courseID = course;
@@ -103,7 +96,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   
   cell = [[ProfCell alloc] initWithFirstName:first
                                     lastName:last
-                                     courses:courseD
+                                     courses:courseDict
                                        image:[UIImage imageNamed:@"quigley.png"]];
   
   return cell;

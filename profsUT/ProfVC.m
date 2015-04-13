@@ -37,9 +37,7 @@ static CGFloat sectionBreak = 20.0;
     
     _first = _prof[@"first"];
     _last = [Util intoLowerCaseExceptForFirstLetter:_prof[@"last"]];
-//    _courses = _prof[@"courses"];
-    NSLog(@"%@", _prof[@"courses"][0][@"courseID"]);
-    NSLog(@"Total courses are: %lul", [_prof[@"courses"] count]);
+
     unsigned long totalCourses = [_prof[@"courses"] count];
     for (unsigned long i = 0; i < totalCourses; i++) {
       NSString *courseID = _prof[@"courses"][i][@"courseID"];
@@ -49,11 +47,11 @@ static CGFloat sectionBreak = 20.0;
       [_courses addObject:course];
       [_courseIDs addObject:courseID];
       [_courseNames addObject:courseName];
-      NSLog(@"%@", course);
+
     }
     
     _courseDict = [NSDictionary dictionaryWithObjects: _courseNames forKeys:_courseIDs];
-    NSLog(@"%@", _courseDict);
+
     
   }
   return self;
