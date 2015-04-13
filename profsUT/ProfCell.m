@@ -4,12 +4,12 @@
 
 - (instancetype)initWithFirstName:(NSString *)first
                          lastName:(NSString *)last
-                          courses:(NSArray *)courses
+                          courses:(NSDictionary *)courses
                             image:(UIImage *)image {
   self = [super init];
   if (self) {
     self.nameLabel = [[UILabel alloc] init];
-    self.nameLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:24.0];
+    self.nameLabel.font = [UIFont fontWithName:@"Copse" size:24.0];
     self.nameLabel.text = [NSString stringWithFormat:@"%@, %@", last, first];
     [self.nameLabel sizeToFit];
     self.nameLabel.frame = CGRectMake(100, 50 - self.nameLabel.frame.size.height,
@@ -19,22 +19,23 @@
 //    self.nameLabel.layer.borderWidth = 2.0;
     
     self.courseLabel = [[UILabel alloc] init];
-    self.courseLabel.font = [UIFont fontWithName:@"Copse" size:16.0];
+    self.courseLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:14.0];
 
     NSString *courseString = @"";
       
     BOOL first = true;
     for (NSString *course in courses) {
-//      if (first) {
-//        courseString = course;
-//        first = FALSE;
-//      } else {
-//        courseString = [courseString stringByAppendingString:[NSString stringWithFormat:@", %@", course]];
-//      }
-//        NSLog(@"Zac%@", course);
+      NSString *courseName = [courses objectForKey:course];
+      if (first) {
+        courseString = course;
+        first = FALSE;
+      } else {
+        courseString = [courseString stringByAppendingString:[NSString stringWithFormat:@", %@", course]];
+      }
+//        NSLog(@"BLABLBAL %@", course);
     }
       
-    courseString = @"bla";
+//    courseString = @"bla";
     self.courseLabel.text = courseString;
     
     self.courseLabel.lineBreakMode = NSLineBreakByWordWrapping;

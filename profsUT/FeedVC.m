@@ -52,6 +52,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NSDictionary *prof = _professor.profsArray[indexPath.item];
+  NSLog(@"%@", prof);
   ProfVC *profVC = [[ProfVC alloc] initWithDictionary:prof];
   [self.navigationController pushViewController:profVC animated:YES];
   [_tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -74,20 +75,35 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSString *first = prof[@"first"];
   NSString *last = [Util intoLowerCaseExceptForFirstLetter:prof[@"last"]];
   NSDictionary *courseDict = prof[@"courses"];
+  NSDictionary *courseD;
   NSMutableArray *courses = [[NSMutableArray alloc] init];
     for(NSString *course in courseDict) {
         NSLog(@"%@, %@", last, course);
     }
 
-  
-  for (NSString *course in courseDict) {
-    NSString *courseID = course;
-    [courses addObject:courseID];
+  unsigned long totalCourses = [prof[@"courses"] count];
+  NSMutableArray *courseIDs = [[NSMutableArray alloc] init];
+  NSMutableArray *courseNames = [[NSMutableArray alloc] init];
+  for (unsigned long i = 0; i < totalCourses; i++) {
+    NSString *courseID = prof[@"courses"][i][@"courseID"];
+    NSString *courseName = prof[@"courses"][i][@"courseName"];
+    
+    NSLog(@"ZACACAC %@ %@", courseID, courseName);
+    
+    [courseIDs addObject:courseID];
+    [courseNames addObject:courseName];
   }
+  
+  courseD = [NSDictionary dictionaryWithObjects: courseNames forKeys:courseIDs];
+
+//  for (NSString *course in courseDict) {
+//    NSString *courseID = course;
+//    [courses addObject:courseID];
+//  }
   
   cell = [[ProfCell alloc] initWithFirstName:first
                                     lastName:last
-                                     courses:courses
+                                     courses:courseD
                                        image:[UIImage imageNamed:@"quigley.png"]];
   
   return cell;

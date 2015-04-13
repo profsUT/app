@@ -19,6 +19,10 @@ static CGFloat sectionBreak = 20.0;
   NSString *_last;
   NSMutableArray *_courses;
   
+  NSDictionary *_courseDict;
+  NSMutableArray *_courseIDs;
+  NSMutableArray *_courseNames;
+  
   CGFloat yEdge;
 }
 
@@ -26,6 +30,9 @@ static CGFloat sectionBreak = 20.0;
   self = [super init];
   if (self) {
     _courses = [[NSMutableArray alloc] init];
+    _courseIDs = [[NSMutableArray alloc] init];
+    _courseNames = [[NSMutableArray alloc] init];
+    
     _prof = prof;
     
     _first = _prof[@"first"];
@@ -40,8 +47,13 @@ static CGFloat sectionBreak = 20.0;
       NSString *course = [NSString stringWithFormat:@"%@: %@", courseID, courseName];
       
       [_courses addObject:course];
+      [_courseIDs addObject:courseID];
+      [_courseNames addObject:courseName];
       NSLog(@"%@", course);
     }
+    
+    _courseDict = [NSDictionary dictionaryWithObjects: _courseNames forKeys:_courseIDs];
+    NSLog(@"%@", _courseDict);
     
   }
   return self;
@@ -124,7 +136,7 @@ static CGFloat sectionBreak = 20.0;
   
   UILabel *nameLabel = [[UILabel alloc] init];
   nameLabel.text = [NSString stringWithFormat:@"%@ %@", _first, _last];
-  nameLabel.font = [UIFont fontWithName:@"Helvetica" size:kH1FontSize];
+  nameLabel.font = [UIFont fontWithName:@"Copse" size:kH1FontSize];
   [nameLabel sizeToFit];
   nameLabel.frame = CGRectMake(leftPadding, yEdge,
                                nameLabel.bounds.size.width, nameLabel.bounds.size.height);
@@ -137,21 +149,20 @@ static CGFloat sectionBreak = 20.0;
   
   UILabel *courseLabel = [[UILabel alloc] init];
   courseLabel.text = @"Courses";
-  courseLabel.font = [UIFont fontWithName:@"Helvetica" size:kH2FontSize];
+  courseLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
   [courseLabel sizeToFit];
   courseLabel.frame = CGRectMake(15.0, yEdge, courseLabel.bounds.size.width, courseLabel.bounds.size.height);
   [_scrollView addSubview:courseLabel];
 
   yEdge += courseLabel.frame.size.height + topPadding;
   
-  for (NSString *course in _courses) {
-//    NSString *courseID = course[@"courseID"];
-    
-    NSString *courseID = course;
-    NSString *courseName = @"Intro to stuff";
-   
+  int currentIdx = 0; // Keep track of current index
+  for (NSString *course in _courseDict) {
+
+    NSString *courseName = [_courseDict objectForKey:course];
     UILabel *courseIDLabel = [[UILabel alloc] init];
-//    courseIDLabel.text = courseID;
+
+    courseIDLabel.numberOfLines = 0;
     courseIDLabel.text = [NSString stringWithFormat:@"%@", course];
     courseIDLabel.font = [UIFont fontWithName:@"Helvetica" size:kPFontSize];
     [courseIDLabel sizeToFit];
@@ -170,6 +181,8 @@ static CGFloat sectionBreak = 20.0;
     [_scrollView addSubview:courseNameLabel];
     
     yEdge += courseNameLabel.frame.size.height + topPadding;
+    
+    currentIdx++;
   }
   
   _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, yEdge + [self.navigationController navigationBar].frame.size.height + 40);
