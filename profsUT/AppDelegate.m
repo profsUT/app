@@ -1,6 +1,7 @@
 #import "AppDelegate.h"
 
 #import "FeedVC.h"
+#import "ClassFeedVC.h"
 #import "Constants.h"
 #import "UIColor+profsUT.h"
 

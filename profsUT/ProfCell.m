@@ -19,7 +19,7 @@
 //    self.nameLabel.layer.borderWidth = 2.0;
     
     self.courseLabel = [[UILabel alloc] init];
-    self.courseLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:14.0];
+    self.courseLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
 
     NSString *courseString = @"";
       

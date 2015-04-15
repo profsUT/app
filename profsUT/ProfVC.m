@@ -162,7 +162,7 @@ static CGFloat sectionBreak = 20.0;
 
     courseIDLabel.numberOfLines = 0;
     courseIDLabel.text = [NSString stringWithFormat:@"%@", course];
-    courseIDLabel.font = [UIFont fontWithName:@"Helvetica" size:kPFontSize];
+    courseIDLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:kPFontSize];
     [courseIDLabel sizeToFit];
     courseIDLabel.frame = CGRectMake(15.0, yEdge,
                                    courseIDLabel.bounds.size.width, courseIDLabel.bounds.size.height);
@@ -172,7 +172,7 @@ static CGFloat sectionBreak = 20.0;
     
     UILabel *courseNameLabel = [[UILabel alloc] init];
     courseNameLabel.text = courseName;
-    courseNameLabel.font = [UIFont fontWithName:@"Helvetica" size:kPFontSize];
+    courseNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:kPFontSize];
     [courseNameLabel sizeToFit];
     courseNameLabel.frame = CGRectMake(15.0, yEdge,
                                      courseNameLabel.bounds.size.width, courseNameLabel.bounds.size.height);

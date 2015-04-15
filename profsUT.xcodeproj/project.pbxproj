@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1115A6E41ADE0F3500AA3A59 /* ClassFeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1115A6E31ADE0F3500AA3A59 /* ClassFeedVC.m */; };
+		1115A6E71ADE10B800AA3A59 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 1115A6E61ADE10B800AA3A59 /* Course.m */; };
+		1115A6EA1ADE174200AA3A59 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1115A6E91ADE174200AA3A59 /* CourseCell.m */; };
 		CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF341AAED392006D08EB /* FeedVC.m */; };
 		CD1FFF491AAED392006D08EB /* Professor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF391AAED392006D08EB /* Professor.m */; };
 		CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */ = {isa = PBXBuildFile; fileRef = CD1FFF3C1AAED392006D08EB /* sample.mov */; };
@@ -37,6 +40,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1115A6E21ADE0F3500AA3A59 /* ClassFeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassFeedVC.h; sourceTree = "<group>"; };
+		1115A6E31ADE0F3500AA3A59 /* ClassFeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassFeedVC.m; sourceTree = "<group>"; };
+		1115A6E51ADE10B800AA3A59 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
+		1115A6E61ADE10B800AA3A59 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
+		1115A6E81ADE174200AA3A59 /* CourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseCell.h; sourceTree = "<group>"; };
+		1115A6E91ADE174200AA3A59 /* CourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCell.m; sourceTree = "<group>"; };
 		CD1FFF331AAED392006D08EB /* FeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedVC.h; sourceTree = "<group>"; };
 		CD1FFF341AAED392006D08EB /* FeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedVC.m; sourceTree = "<group>"; };
 		CD1FFF381AAED392006D08EB /* Professor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Professor.h; sourceTree = "<group>"; };
@@ -137,12 +146,18 @@
 				CD8074151AA25423007E334A /* AppDelegate.m */,
 				CD1FFF331AAED392006D08EB /* FeedVC.h */,
 				CD1FFF341AAED392006D08EB /* FeedVC.m */,
+				1115A6E21ADE0F3500AA3A59 /* ClassFeedVC.h */,
+				1115A6E31ADE0F3500AA3A59 /* ClassFeedVC.m */,
+				1115A6E81ADE174200AA3A59 /* CourseCell.h */,
+				1115A6E91ADE174200AA3A59 /* CourseCell.m */,
 				CD9E129C1AC27E96004363A6 /* ProfCell.h */,
 				CD9E129D1AC27E96004363A6 /* ProfCell.m */,
 				CD251C6A1AA25AFF0062E2BC /* ProfVC.h */,
 				CD251C6B1AA25AFF0062E2BC /* ProfVC.m */,
 				CD1FFF381AAED392006D08EB /* Professor.h */,
 				CD1FFF391AAED392006D08EB /* Professor.m */,
+				1115A6E51ADE10B800AA3A59 /* Course.h */,
+				1115A6E61ADE10B800AA3A59 /* Course.m */,
 				CD251C7B1AA2631B0062E2BC /* Resources */,
 				CD251C711AA2607F0062E2BC /* Util */,
 				CD80741D1AA25423007E334A /* Images.xcassets */,
@@ -284,12 +299,15 @@
 				CD8074161AA25423007E334A /* AppDelegate.m in Sources */,
 				CD1FFF491AAED392006D08EB /* Professor.m in Sources */,
 				CD251C7A1AA261170062E2BC /* UIColor+profsUT.m in Sources */,
+				1115A6E71ADE10B800AA3A59 /* Course.m in Sources */,
 				CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */,
 				CD9E129E1AC27E96004363A6 /* ProfCell.m in Sources */,
 				CD8074131AA25423007E334A /* main.m in Sources */,
 				CD251C6C1AA25AFF0062E2BC /* ProfVC.m in Sources */,
+				1115A6EA1ADE174200AA3A59 /* CourseCell.m in Sources */,
 				CD251C801AA268640062E2BC /* Constants.m in Sources */,
 				CD1FFF4F1AAED392006D08EB /* Util.m in Sources */,
+				1115A6E41ADE0F3500AA3A59 /* ClassFeedVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
