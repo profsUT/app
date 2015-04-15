@@ -24,6 +24,9 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   self = [super init];
   if (self) {
     _course = [Course sharedInstance];
+
+    // Set title for the tab
+    self.title = @"Courses";
   }
   return self;
 }
@@ -38,7 +41,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   
   self.view.backgroundColor = [UIColor whiteColor];
   
-  self.navigationItem.title = @"profsUT";
+  self.navigationItem.title = @"Courses";
   UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@""
                                                                  style:UIBarButtonItemStylePlain
                                                                 target:nil

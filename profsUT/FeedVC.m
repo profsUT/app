@@ -16,7 +16,12 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   self = [super init];
   if (self) {
     _professor = [Professor sharedInstance];
+    // Set the title for the tab
+    self.title = @"Professors";
+    // Set the image icon for the tab
+//    self.tabBarItem.image = [UIImage imageNamed:@"first.png"];
   }
+  
   return self;
 }
 
@@ -30,7 +35,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   
   self.view.backgroundColor = [UIColor whiteColor];
   
-  self.navigationItem.title = @"profsUT";
+  self.navigationItem.title = @"Professors";
   UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@""
                                                                  style:UIBarButtonItemStylePlain
                                                                 target:nil
