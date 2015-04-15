@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.navigationItem.title = @"profsUT";
-  CGRect frame = CGRectMake(0.0, 2.0, self.view.bounds.size.width, 48);
+  CGRect frame = CGRectMake(0.0, -1.0, self.view.bounds.size.width, 50);
   UIView *v = [[UIView alloc] initWithFrame:frame];
   [v setBackgroundColor:[UIColor burntOrangeColor]];
   [v setAlpha:1];
@@ -29,13 +29,13 @@
   //set the tab bar title appearance for normal state
   [[UITabBarItem appearance]
    setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
-                            NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f]}
+                            NSFontAttributeName:[UIFont fontWithName:@"Copse" size:14.0f]}
    forState:UIControlStateNormal];
   
   //set the tab bar title appearance for selected state
   [[UITabBarItem appearance]
-   setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor blueColor],
-                             NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f]}
+   setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
+                             NSFontAttributeName:[UIFont fontWithName:@"Copse" size:14.0f]}
    forState:UIControlStateHighlighted];
 }
 

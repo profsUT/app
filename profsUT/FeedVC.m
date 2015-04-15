@@ -5,6 +5,8 @@
 #import "ProfVC.h"
 #import "Util.h"
 
+@import CoreGraphics;
+
 static NSString *kCellIdentifier = @"Cell Identifier";
 
 @implementation FeedVC {
@@ -19,7 +21,9 @@ static NSString *kCellIdentifier = @"Cell Identifier";
     // Set the title for the tab
     self.title = @"Professors";
     // Set the image icon for the tab
-//    self.tabBarItem.image = [UIImage imageNamed:@"first.png"];
+    UIImage *tabImage = [UIImage imageNamed:@"profIcon.png"];
+    UIImage *scaledImage = [Util imageWithImage:tabImage scaledToSize:CGSizeMake(25,25)];
+    self.tabBarItem.image = scaledImage;
   }
   
   return self;

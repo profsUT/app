@@ -10,6 +10,7 @@
 
 #import "CourseCell.h"
 #import "Course.h"
+#import "CourseVC.h"
 #import "ProfVC.h"
 #import "Util.h"
 
@@ -27,6 +28,10 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 
     // Set title for the tab
     self.title = @"Courses";
+    // Set the image icon for the tab
+    UIImage *tabImage = [UIImage imageNamed:@"courseIcon.png"];
+    UIImage *scaledImage = [Util imageWithImage:tabImage scaledToSize:CGSizeMake(25,25)];
+    self.tabBarItem.image = scaledImage;
   }
   return self;
 }
@@ -62,9 +67,20 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//  NSDictionary *course = _course.coursesArray[indexPath.item];
+  
   NSDictionary *course = _course.coursesArray[indexPath.item];
-//  ProfVC *courseVC = [[CourseVC alloc] initWithDictionary:course];
-//  [self.navigationController pushViewController:courseVC animated:YES];
+  NSString *courseID = course[@"courseID"];
+  NSString *courseName = course[@"courseName"];
+  
+  NSString *profFirst = [[course valueForKey:@"instructor"] valueForKey:@"first"];
+  NSString *profLast = [[course valueForKey:@"instructor"] valueForKey:@"last"];
+  NSString *profName = [NSString stringWithFormat:@"%@, %@", profLast, profFirst];
+
+  CourseVC *courseVC = [[CourseVC alloc] initWithCourseID:(NSString *)courseID
+                                               courseName:(NSString *)courseName
+                                                 profName:(NSString *)profName];
+  [self.navigationController pushViewController:courseVC animated:YES];
   [_tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 

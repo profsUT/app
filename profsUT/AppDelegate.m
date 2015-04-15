@@ -14,7 +14,7 @@
 
 
 @synthesize tabBarController;
-@synthesize firstViewController, secondViewController;
+@synthesize firstViewController, secondViewController, thirdViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -22,24 +22,13 @@
   
   // Tab bar stuff
   self.firstViewController = [[FeedVC alloc] init];
-//  UINavigationController *firstNavVC = [[UINavigationController alloc] initWithRootViewController:firstViewController];
-  
   self.secondViewController = [[ClassFeedVC alloc] init];
-//  UINavigationController *secondNavVC = [[UINavigationController alloc] initWithRootViewController:secondViewController];
+//  self.thirdViewController = [[ProfVC alloc] init];
   
   NSArray *myViewControllers = [[NSArray alloc] initWithObjects:
                                 self.firstViewController,
                                 self.secondViewController, nil];
   
-//  firstNavVC.tabBarItem =
-//  [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"First", nil)
-//                                image:nil
-//                                  tag:1];
-//  
-//  secondNavVC.tabBarItem =
-//  [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Second", nil)
-//                                image:nil
-//                                  tag:2];
   
   // Initialize the tab bar controller
   self.tabBarController = [[TabBarController alloc] init];
