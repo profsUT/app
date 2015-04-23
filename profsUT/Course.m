@@ -9,7 +9,7 @@
   if (self) {
     _responseData = [NSMutableData data];
     NSURLRequest *request =
-    [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.59.103/profsUT/api/courses/"]];
+    [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://djangoprofs-env.elasticbeanstalk.com/profsUT/api/courses/"]];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
   }

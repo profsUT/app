@@ -1,7 +1,46 @@
 #import "CourseCell.h"
 
 
+static CGFloat leftPadding = 20.0;
+static CGFloat rightPadding = 35.0;
+static CGFloat topPadding = 30.0;
+
 @implementation CourseCell
+
+-(instancetype)initWithCourseID:(NSString *)_courseID
+                     courseName:(NSString *)_courseName {
+  
+  self = [super init];
+  if (self) {
+    leftPadding = 15.0;
+    rightPadding = 35.0;
+    topPadding = 15.0;
+    
+    self.courseNameLabel = [[UILabel alloc] init];
+    self.courseIDLabel = [[UILabel alloc] init];
+    
+    self.courseNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+    self.courseNameLabel.text = _courseName;
+    [self.courseNameLabel sizeToFit];
+    self.courseNameLabel.frame = CGRectMake(leftPadding, topPadding - self.courseNameLabel.frame.size.height,
+                                            self.frame.size.width - rightPadding, self.courseNameLabel.frame.size.height+20);
+    self.courseNameLabel.numberOfLines = 0;
+    
+    self.courseIDLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+    self.courseIDLabel.text = _courseID;
+    [self.courseIDLabel sizeToFit];
+    self.courseIDLabel.frame = CGRectMake(leftPadding+2, topPadding,
+                                          self.frame.size.width - 100, self.courseIDLabel.frame.size.height * 2);
+    
+    [self.contentView addSubview:self.courseNameLabel];
+    [self.contentView addSubview:self.courseIDLabel];
+
+
+
+  }
+  
+  return self;
+}
 
 - (instancetype)initWithCourseID:(NSString *)_courseID
                       courseName:(NSString *)_courseName

@@ -7,6 +7,9 @@
 @property (nonatomic, retain) UILabel *profNameLabel;
 //@property (nonatomic, retain) UIImageView *portraitView;
 
+-(instancetype)initWithCourseID:(NSString *)_courseID
+                     courseName:(NSString *)_courseName;
+
 - (instancetype)initWithCourseID:(NSString *)_courseID
                       courseName:(NSString *)_courseName
                    profFirstName:(NSString *)_profFirstName

@@ -3,7 +3,16 @@
 @implementation Util
 
 + (NSString *)intoLowerCaseExceptForFirstLetter:(NSString *)string {
+  
+  // Split whitespace separated words
+  NSArray *wordsAndEmptyStrings = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+  NSArray *words = [wordsAndEmptyStrings filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"length > 0"]];
+  
+  NSString* lower;
   if (string && [string length] > 0) {
+//    for (NSString *word in words) {
+//      
+//    }
     NSString *lower = [string lowercaseString];
     return [lower stringByReplacingCharactersInRange:NSMakeRange(0,1)
                                            withString:[[lower substringToIndex:1] capitalizedString]];

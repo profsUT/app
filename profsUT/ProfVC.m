@@ -1,17 +1,24 @@
 #import "ProfVC.h"
+#import "CourseVC.h"
 
 #import "Professor.h"
 #import "Constants.h"
 #import "Util.h"
+#import "CourseCell.h"
 
 @import MediaPlayer;
 
 static CGFloat leftPadding = 15.0;
+static CGFloat rightPadding = 15.0;
 static CGFloat topPadding = 10.0;
 static CGFloat sectionBreak = 20.0;
+static CGFloat cellHeight = 50.0;
+
+static NSString *kCellIdentifier = @"Cell Identifier";
 
 @implementation ProfVC {
   UIScrollView *_scrollView;
+  UITableView *_tableView;
   NSInteger _index;
   NSDictionary *_prof;
   
@@ -20,7 +27,7 @@ static CGFloat sectionBreak = 20.0;
   NSMutableArray *_courses;
   
   NSDictionary *_courseDict;
-  NSMutableArray *_courseIDs;
+  NSMutableArray *courseCode;
   NSMutableArray *_courseNames;
   
   CGFloat yEdge;
@@ -30,7 +37,7 @@ static CGFloat sectionBreak = 20.0;
   self = [super init];
   if (self) {
     _courses = [[NSMutableArray alloc] init];
-    _courseIDs = [[NSMutableArray alloc] init];
+    courseCode = [[NSMutableArray alloc] init];
     _courseNames = [[NSMutableArray alloc] init];
     
     _prof = prof;
@@ -45,34 +52,18 @@ static CGFloat sectionBreak = 20.0;
       NSString *course = [NSString stringWithFormat:@"%@: %@", courseID, courseName];
       
       [_courses addObject:course];
-      [_courseIDs addObject:courseID];
+      [courseCode addObject:courseID];
       [_courseNames addObject:courseName];
 
     }
     
-    _courseDict = [NSDictionary dictionaryWithObjects: _courseNames forKeys:_courseIDs];
+    _courseDict = [NSDictionary dictionaryWithObjects: _courseNames forKeys:courseCode];
 
     
   }
   return self;
 }
 
-- (void)playVideoWithId:(NSString *)videoId {
-    
-    NSString *youTubeVideoHTML = @"<html><head><style>body{margin:0px 0px 0px 0px;}</style></head> <body> <div id=\"player\"></div> <script> var tag = document.createElement('script'); tag.src = 'http://www.youtube.com/player_api'; var firstScriptTag = document.getElementsByTagName('script')[0]; firstScriptTag.parentNode.insertBefore(tag, firstScriptTag); var player; function onYouTubePlayerAPIReady() { player = new YT.Player('player', { width:'300', height:'300', videoId:'OCpSqs6AqoU', events: { 'onReady': onPlayerReady } }); } function onPlayerReady(event) { event.target.playVideo(); } </script> </body> </html>";
-    
-    NSString *html = [NSString stringWithFormat:youTubeVideoHTML, videoId];
-    
-    UIWebView *videoView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
-    videoView.backgroundColor = [UIColor clearColor];
-    videoView.opaque = NO;
-    //videoView.delegate = self;
-    [self.view addSubview:videoView];
-    
-    videoView.mediaPlaybackRequiresUserAction = NO;
-    
-    [videoView loadHTMLString:youTubeVideoHTML baseURL:[[NSBundle mainBundle] resourceURL]];
-}
 
 // To-Do Access HLS video from our back-end
 -(void)playVideoFromURL {
@@ -132,6 +123,7 @@ static CGFloat sectionBreak = 20.0;
   
   yEdge = sectionBreak;
   
+  
   UILabel *nameLabel = [[UILabel alloc] init];
   nameLabel.text = [NSString stringWithFormat:@"%@ %@", _first, _last];
   nameLabel.font = [UIFont fontWithName:@"Copse" size:kH1FontSize];
@@ -154,36 +146,104 @@ static CGFloat sectionBreak = 20.0;
 
   yEdge += courseLabel.frame.size.height + topPadding;
   
-  int currentIdx = 0; // Keep track of current index
-  for (NSString *course in _courseDict) {
+//  int currentIdx = 0; // Keep track of current index
+//  for (NSString *course in _courseDict) {
+//
+//    NSString *courseName = [_courseDict objectForKey:course];
+//    UILabel *courseIDLabel = [[UILabel alloc] init];
+//
+//    courseIDLabel.numberOfLines = 0;
+//    courseIDLabel.text = [NSString stringWithFormat:@"%@", course];
+//    courseIDLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:kPFontSize];
+//    [courseIDLabel sizeToFit];
+//    courseIDLabel.frame = CGRectMake(15.0, yEdge,
+//                                   courseIDLabel.bounds.size.width, courseIDLabel.bounds.size.height);
+//    [_scrollView addSubview:courseIDLabel];
+//    
+//    yEdge += courseIDLabel.frame.size.height;
+//    
+//    UILabel *courseNameLabel = [[UILabel alloc] init];
+//    courseNameLabel.text = courseName;
+//    courseNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:kPFontSize];
+//    [courseNameLabel sizeToFit];
+//    courseNameLabel.frame = CGRectMake(15.0, yEdge,
+//                                     courseNameLabel.bounds.size.width, courseNameLabel.bounds.size.height);
+//    [_scrollView addSubview:courseNameLabel];
+//    
+//    yEdge += courseNameLabel.frame.size.height + topPadding;
+//    
+//    currentIdx++;
+//  }
+  
+  yEdge -= 10;
+  _tableView  = [[UITableView alloc] init];
+  _tableView.dataSource = self;
+  _tableView.delegate = self;
+  _tableView.showsVerticalScrollIndicator = NO;
+  _tableView.frame = CGRectMake(0, yEdge, self.view.frame.size.width-15.0, 100.0*[_courseDict count]);
+  [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
+  [_scrollView addSubview:_tableView];
+  
+//  UITableView *coursesTable = [[UITableView alloc] init];
+  
+  
+  _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, yEdge + [self.navigationController navigationBar].frame.size.height + 40 + _tableView.frame.size.height/2);
+}
 
-    NSString *courseName = [_courseDict objectForKey:course];
-    UILabel *courseIDLabel = [[UILabel alloc] init];
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+  NSString *courseKey = _prof[@"courses"][indexPath.item][@"id"];
+  
+//  NSLog(@"%@", _prof[@"courses"][indexPath.item]);
+  CourseVC *courseVC = [[CourseVC alloc] initWithCourseKey:courseKey];
+  [self.navigationController pushViewController:courseVC animated:YES];
+  [_tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
 
-    courseIDLabel.numberOfLines = 0;
-    courseIDLabel.text = [NSString stringWithFormat:@"%@", course];
-    courseIDLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:kPFontSize];
-    [courseIDLabel sizeToFit];
-    courseIDLabel.frame = CGRectMake(15.0, yEdge,
-                                   courseIDLabel.bounds.size.width, courseIDLabel.bounds.size.height);
-    [_scrollView addSubview:courseIDLabel];
-    
-    yEdge += courseIDLabel.frame.size.height;
-    
-    UILabel *courseNameLabel = [[UILabel alloc] init];
-    courseNameLabel.text = courseName;
-    courseNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:kPFontSize];
-    [courseNameLabel sizeToFit];
-    courseNameLabel.frame = CGRectMake(15.0, yEdge,
-                                     courseNameLabel.bounds.size.width, courseNameLabel.bounds.size.height);
-    [_scrollView addSubview:courseNameLabel];
-    
-    yEdge += courseNameLabel.frame.size.height + topPadding;
-    
-    currentIdx++;
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  return [_courseDict count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return cellHeight;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView
+        cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+  
+  NSArray *allKeys = [_courseDict allKeys];
+  NSLog(@"%@", _prof[@"courses"][0]);
+  NSString *courseKey = courseCode[indexPath.item];
+  NSString *courseName = [_courseDict objectForKey:courseKey];
+  
+  
+  // Number of courses
+  unsigned long numCourses = [_courses count];
+  for (unsigned long i = 0; i < numCourses; i++) {
+  
   }
   
-  _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, yEdge + [self.navigationController navigationBar].frame.size.height + 40);
+//  for (NSString *course in _courseDict) {
+//    
+//    NSString *courseName = [_courseDict objectForKey:course];
+//  }
+
+
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellIdentifier];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+  }
+  cell = [[CourseCell alloc] initWithCourseID: courseKey
+                                   courseName: courseName];
+//
+//  cell.textLabel.text = courseCode;
+//  cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:kPFontSize];
+//  cell.detailTextLabel.text = @"fdsafads";
+  
+  return cell;
 }
 
 @end

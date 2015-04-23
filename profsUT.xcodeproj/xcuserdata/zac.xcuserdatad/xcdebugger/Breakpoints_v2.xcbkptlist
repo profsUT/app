@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "profsUT/CourseVC.h"
-            timestampString = "450774725.859551"
+            timestampString = "451442628.046439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "10"
-            endingLineNumber = "10"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
             landmarkName = "@interface CourseVC"
             landmarkType = "2">
          </BreakpointContent>

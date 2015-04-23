@@ -72,6 +72,8 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSDictionary *course = _course.coursesArray[indexPath.item];
   NSString *courseID = course[@"courseID"];
   NSString *courseName = course[@"courseName"];
+  NSString *courseKey = course[@"id"];
+  NSLog(@"%@", courseKey);
   
   NSString *profFirst = [[course valueForKey:@"instructor"] valueForKey:@"first"];
   NSString *profLast = [[course valueForKey:@"instructor"] valueForKey:@"last"];
@@ -79,6 +81,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 
   CourseVC *courseVC = [[CourseVC alloc] initWithCourseID:(NSString *)courseID
                                                courseName:(NSString *)courseName
+                                                courseKey:(NSString *)courseKey
                                                  profName:(NSString *)profName];
   [self.navigationController pushViewController:courseVC animated:YES];
   [_tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -103,9 +106,9 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSString *courseName = course[@"courseName"];
 
   
-//  NSString *last = [Util intoLowerCaseExceptForFirstLetter:prof[@"last"]];
+  NSString *first = [Util intoLowerCaseExceptForFirstLetter:[[course valueForKey:@"instructor"] valueForKey:@"first"]];
   
-  NSString *profFirst = [[course valueForKey:@"instructor"] valueForKey:@"first"];
+  NSString *profFirst = first;
   NSString *profLast = [[course valueForKey:@"instructor"] valueForKey:@"last"];
   
   // Initialize custom CourseCell here
