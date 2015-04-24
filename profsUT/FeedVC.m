@@ -81,9 +81,12 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   ProfCell *cell = [_tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
   
   NSDictionary *prof = _professor.profsArray[indexPath.item];
-  NSString *first = prof[@"first"];
-  NSString *last = [Util intoLowerCaseExceptForFirstLetter:prof[@"last"]];
+  NSString *first = [Util intoLowerCaseExceptForFirstLetter:prof[@"first"]];
+  NSString *last = prof[@"last"];
   NSDictionary *courseDict;
+//  NSURL *profPicURL = prof[@"profile_photo"];
+//  NSData *data = [NSData dataWithContentsOfURL:profPicURL];
+//  UIImage *img = [[UIImage alloc] initWithData:data];
 
 
   unsigned long totalCourses = [prof[@"courses"] count];
@@ -98,11 +101,6 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   }
   
   courseDict = [NSDictionary dictionaryWithObjects: courseNames forKeys:courseIDs];
-
-//  for (NSString *course in courseDict) {
-//    NSString *courseID = course;
-//    [courses addObject:courseID];
-//  }
   
   cell = [[ProfCell alloc] initWithFirstName:first
                                     lastName:last

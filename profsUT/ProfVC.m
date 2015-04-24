@@ -207,7 +207,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
                  self.navigationItem.title = _last;
 
                  UILabel *nameLabel = [[UILabel alloc] init];
-                 nameLabel.text = [NSString stringWithFormat:@"%@ %@", _first, _last];
+                 nameLabel.text = [Util intoLowerCaseExceptForFirstLetter:[NSString stringWithFormat:@"%@ %@", _first, _last]];
                  nameLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
                  [nameLabel sizeToFit];
                  nameLabel.frame = CGRectMake(leftPadding, yEdge,
