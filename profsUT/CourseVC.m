@@ -76,9 +76,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   else {
     [self setShowInstructor:NO];
   }
-  
-  NSLog(@"Show instructor is: %d", (int)showInstructor);
-  NSLog(@"Self setInstructor is: %d", [self showInstructor]);
+
   
   _courseKey = courseKey;
   
@@ -135,8 +133,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSArray *_courseJSON = [NSJSONSerialization JSONObjectWithData:_responseData
                                                   options:NSJSONReadingMutableLeaves
                                                     error:&myError];
-  
-  NSLog(@"%@", _courseJSON);
+
   [[NSNotificationCenter defaultCenter] postNotificationName:@"NSURLConnectionDidFinish"
                                                       object:nil];
 }
@@ -224,13 +221,38 @@ static NSString *kCellIdentifier = @"Cell Identifier";
            [_scrollView addSubview:timeLabel];
            
            // To do: Get times from nested JSON
-           UILabel *timeInfo = [[UILabel alloc] init];
-           timeInfo.text = @"5:30-7";
-           timeInfo.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
-           [timeInfo sizeToFit];
-           timeInfo.frame = CGRectMake(15.0, yEdge, timeInfo.bounds.size.width, timeInfo.bounds.size.height);
-           yEdge += timeInfo.frame.size.height + 2*topPadding;
-           [_scrollView addSubview:timeInfo];
+           
+           unsigned long totalTimes = [json[@"times"] count];
+           
+           for (unsigned long i=0; i<totalTimes; i++) {
+             UILabel *timeInfo = [[UILabel alloc] init];
+             NSMutableString *daysText = [NSMutableString stringWithCapacity:100];
+             
+             NSNumber *num = [NSNumber numberWithInt:1];
+             NSArray *days = [json[@"times"][i] allKeysForObject:num];
+             NSLog(@"%@", days);
+             int counter = 0;
+             for (NSString *day in days) {
+               if (counter != 0) {
+                 [daysText appendString:@", "];
+               }
+               [daysText appendString:[Util intoLowerCaseExceptForFirstLetter:day]];
+               counter++;
+             }
+             
+             NSString *startTime = json[@"times"][i][@"time"];
+             NSString *endTime = json[@"times"][i][@"endTime"];
+             
+             timeInfo.text = [NSString stringWithFormat:@"%@: %@—%@", daysText, startTime, endTime];
+             timeInfo.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+             [timeInfo sizeToFit];
+             timeInfo.frame = CGRectMake(15.0, yEdge, timeInfo.bounds.size.width, timeInfo.bounds.size.height);
+             yEdge += timeInfo.frame.size.height;
+             [_scrollView addSubview:timeInfo];
+
+           }
+           
+           yEdge += 2*topPadding;
            
            
            if ([self showInstructor]) {
