@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 
-@interface CourseVC : UIViewController
+@interface CourseVC : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
 
 // designated initializer
 - (instancetype)initWithCourseKey:(NSString *)courseKey;

@@ -1,6 +1,28 @@
 #import "ProfCell.h"
 
+static CGFloat leftPadding = 15.0;
+
 @implementation ProfCell
+
+- (instancetype)initWithFullName:(NSString *)name {
+  self = [super init];
+  if (self) {
+    self.nameLabel = [[UILabel alloc] init];
+    
+    self.nameLabel = [[UILabel alloc] init];
+    self.nameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+    self.nameLabel.text = name;
+    [self.nameLabel sizeToFit];
+    self.nameLabel.frame = CGRectMake(leftPadding, 0,
+                                      self.frame.size.width - 100, self.nameLabel.frame.size.height+20);
+    self.nameLabel.numberOfLines = 0;
+    
+    [self.contentView addSubview:self.nameLabel];
+
+  }
+  
+  return self;
+}
 
 - (instancetype)initWithFirstName:(NSString *)first
                          lastName:(NSString *)last

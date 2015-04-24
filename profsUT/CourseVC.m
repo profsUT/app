@@ -3,10 +3,13 @@
 #import "Course.h"
 #import "Constants.h"
 #import "Util.h"
+#import "ProfCell.h"
+#import "ProfVC.h"
 
 static CGFloat leftPadding = 15.0;
 static CGFloat topPadding = 10.0;
 static CGFloat sectionBreak = 20.0;
+static CGFloat cellHeight = 40.0;
 
 static NSString *kCellIdentifier = @"Cell Identifier";
 
@@ -28,6 +31,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSString *_courseTime;
   NSString *_courseSyllabus;
   NSString *_profName;
+  NSString *_profKey;
   
   NSString *_requestURL;
   NSURLRequest *_request;
@@ -116,44 +120,6 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   CGFloat widthOfScreen  =  [[UIScreen mainScreen] bounds].size.width;
   CGFloat heightOfScreen = [[UIScreen mainScreen] bounds].size.height;
   
-  
-  // Description Label
-//  UILabel *descriptionLabel = [[UILabel alloc] init];
-//  descriptionLabel.text = @"Description";
-//  descriptionLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
-//  [descriptionLabel sizeToFit];
-//  descriptionLabel.frame = CGRectMake(15.0, yEdge, descriptionLabel.bounds.size.width, descriptionLabel.bounds.size.height);
-//  [_scrollView addSubview:descriptionLabel];
-//  
-//  yEdge += descriptionLabel.frame.size.height + topPadding/4;
-  
-  
-//  UILabel *descriptionTextLabel = [[UILabel alloc] init];
-//  descriptionTextLabel.text = @"Lorem ipsum dolor sit amet, in eam assum luptatum vituperata.\n Ipsum graeci sed ut. Eos at habeo integre facilisis, everti expetendis id cum, nihil argumentum in per\n. Ut nam clita homero omnium. Sale nulla electram at eam. Nostro prodesset reprehendunt duo ea, eu eum brute evertitur moderatius. Te sed aliquip concludaturque, eripuit necessitatibus ut nam, est sanctus definitionem ei.";
-//  descriptionTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:kPFontSize];
-//  descriptionTextLabel.numberOfLines = 0;
-//  [descriptionTextLabel sizeToFit];
-//  CGSize labelSize = [descriptionTextLabel.text sizeWithFont:descriptionTextLabel.font constrainedToSize:CGSizeMake(300, 300000) lineBreakMode:NSLineBreakByWordWrapping];
-//  CGFloat h = labelSize.height;
-//  descriptionTextLabel.frame = CGRectMake(15.0, yEdge, widthOfScreen-leftPadding, h);
-//  yEdge += h;
-//  [_scrollView addSubview:descriptionTextLabel];
-//  
-//  yEdge += descriptionLabel.frame.size.height + topPadding;
-  
-  
-  // Syllabus label
-//  UILabel *syllabusLabel = [[UILabel alloc] init];
-//  syllabusLabel.text = @"Syllabus";
-//  syllabusLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
-//  [syllabusLabel sizeToFit];
-//  syllabusLabel.frame = CGRectMake(15.0, yEdge, syllabusLabel.bounds.size.width, syllabusLabel.bounds.size.height);
-//  [_scrollView addSubview:syllabusLabel];
-//  
-//  yEdge += syllabusLabel.frame.size.height + topPadding;
-  
-  
-  
   NSURLResponse *requestResponse;
   
   NSData *requestHandler = [NSURLConnection sendSynchronousRequest:_request returningResponse:&requestResponse error:nil];
@@ -162,110 +128,139 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   [NSURLConnection sendAsynchronousRequest:_request
                                      queue:[NSOperationQueue mainQueue]
                          completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                           if (!error) {
-                             NSError *e = nil;
-                             NSDictionary *json = [NSJSONSerialization JSONObjectWithData: requestHandler options: NSJSONReadingMutableContainers error: &e];
-                             // update the UI here (and only here to the extent it depends on the json)
-                             
-                             // Course Name
-                             UILabel *courseNameLabel = [[UILabel alloc] init];
-                             courseNameLabel.text =  json[@"courseName"];
-                             courseNameLabel.font = [UIFont fontWithName:@"Copse" size:20];
-                             courseNameLabel.numberOfLines = 0;
-                             [courseNameLabel sizeToFit];
-                             
-                             CGSize labelSize = [courseNameLabel.text sizeWithFont:courseNameLabel.font constrainedToSize:CGSizeMake(300, 300000) lineBreakMode:NSLineBreakByWordWrapping];
-                             CGFloat h = labelSize.height;
-                             courseNameLabel.frame = CGRectMake(15.0, yEdge, widthOfScreen-leftPadding, h);
-                             yEdge += h;
+         if (!error) {
+           NSError *e = nil;
+           NSDictionary *json = [NSJSONSerialization JSONObjectWithData: requestHandler options: NSJSONReadingMutableContainers error: &e];
+           // update the UI here (and only here to the extent it depends on the json)
+           
+           NSLog(@"%@", json[@"instructor"][@"first"]);
+           
+           NSString *firstName = json[@"instructor"][@"first"];
+           NSString *lastName = json[@"instructor"][@"last"];
+           NSString *fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+           
+           _profName = [Util intoLowerCaseExceptForFirstLetter:fullName];
+           _profKey = json[@"instructor"][@"id"];
+           
+           // Course Name
+           UILabel *courseNameLabel = [[UILabel alloc] init];
+           courseNameLabel.text =  json[@"courseName"];
+           courseNameLabel.font = [UIFont fontWithName:@"Copse" size:20];
+           courseNameLabel.numberOfLines = 0;
+           [courseNameLabel sizeToFit];
+           
+           CGSize labelSize = [courseNameLabel.text sizeWithFont:courseNameLabel.font constrainedToSize:CGSizeMake(300, 300000) lineBreakMode:NSLineBreakByWordWrapping];
+           CGFloat h = labelSize.height;
+           courseNameLabel.frame = CGRectMake(15.0, yEdge, widthOfScreen-leftPadding, h);
+           yEdge += h;
 
-                             [_scrollView addSubview:courseNameLabel];
-                             
-                             // Course ID
-                             UILabel *courseIDLabel = [[UILabel alloc] init];
-                             courseIDLabel.text = json[@"courseID"];
-                             courseIDLabel.text = _courseID;
-                             courseIDLabel.font = [UIFont fontWithName:@"Copse" size:20];
-                             [courseIDLabel sizeToFit];
-                             courseIDLabel.frame = CGRectMake(15.0, yEdge, courseIDLabel.bounds.size.width, courseIDLabel.bounds.size.height);
-                           
-                             yEdge += courseIDLabel.frame.size.height + 2*topPadding;
-                             [_scrollView addSubview:courseIDLabel];
-                             
-                             // Ratings Label
-                             UILabel *ratingsLabel = [[UILabel alloc] init];
-                             ratingsLabel.text = @"Course Ratings";
-                             ratingsLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
-                             [ratingsLabel sizeToFit];
-                             ratingsLabel.frame = CGRectMake(15.0, yEdge, ratingsLabel.bounds.size.width, ratingsLabel.bounds.size.height);
-                             yEdge += ratingsLabel.frame.size.height + 2*topPadding;
-                             [_scrollView addSubview:ratingsLabel];
-                             
-                             // Time Label
-                             UILabel *timeLabel = [[UILabel alloc] init];
-                             timeLabel.text = @"Time";
-                             timeLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
-                             [timeLabel sizeToFit];
-                             timeLabel.frame = CGRectMake(15.0, yEdge, timeLabel.bounds.size.width, timeLabel.bounds.size.height);
-                             yEdge += timeLabel.frame.size.height;
-                             [_scrollView addSubview:timeLabel];
-                             
-                             // To do: Get times from nested JSON
-                             UILabel *timeInfo = [[UILabel alloc] init];
-                             timeInfo.text = @"5:30-7";
-                             timeInfo.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
-                             [timeInfo sizeToFit];
-                             timeInfo.frame = CGRectMake(15.0, yEdge, timeInfo.bounds.size.width, timeInfo.bounds.size.height);
-                             yEdge += timeInfo.frame.size.height + 2*topPadding;
-                             [_scrollView addSubview:timeInfo];
+           [_scrollView addSubview:courseNameLabel];
+           
+           // Course ID
+           UILabel *courseIDLabel = [[UILabel alloc] init];
+           courseIDLabel.text = json[@"courseID"];
+           courseIDLabel.text = _courseID;
+           courseIDLabel.font = [UIFont fontWithName:@"Copse" size:20];
+           [courseIDLabel sizeToFit];
+           courseIDLabel.frame = CGRectMake(15.0, yEdge, courseIDLabel.bounds.size.width, courseIDLabel.bounds.size.height);
+         
+           yEdge += courseIDLabel.frame.size.height + 2*topPadding;
+           [_scrollView addSubview:courseIDLabel];
+           
+           // Ratings Label
+           UILabel *ratingsLabel = [[UILabel alloc] init];
+           ratingsLabel.text = @"Course Ratings";
+           ratingsLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+           [ratingsLabel sizeToFit];
+           ratingsLabel.frame = CGRectMake(15.0, yEdge, ratingsLabel.bounds.size.width, ratingsLabel.bounds.size.height);
+           yEdge += ratingsLabel.frame.size.height + 2*topPadding;
+           [_scrollView addSubview:ratingsLabel];
+           
+           // Time Label
+           UILabel *timeLabel = [[UILabel alloc] init];
+           timeLabel.text = @"Time";
+           timeLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+           [timeLabel sizeToFit];
+           timeLabel.frame = CGRectMake(15.0, yEdge, timeLabel.bounds.size.width, timeLabel.bounds.size.height);
+           yEdge += timeLabel.frame.size.height;
+           [_scrollView addSubview:timeLabel];
+           
+           // To do: Get times from nested JSON
+           UILabel *timeInfo = [[UILabel alloc] init];
+           timeInfo.text = @"5:30-7";
+           timeInfo.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+           [timeInfo sizeToFit];
+           timeInfo.frame = CGRectMake(15.0, yEdge, timeInfo.bounds.size.width, timeInfo.bounds.size.height);
+           yEdge += timeInfo.frame.size.height + 2*topPadding;
+           [_scrollView addSubview:timeInfo];
+           
+           
+           // Time Label
+           UILabel *instructorLabel = [[UILabel alloc] init];
+           instructorLabel.text = @"Instructor";
+           instructorLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+           [instructorLabel sizeToFit];
+           instructorLabel.frame = CGRectMake(15.0, yEdge, instructorLabel.bounds.size.width, timeLabel.bounds.size.height);
+           yEdge += instructorLabel.frame.size.height;
+           [_scrollView addSubview:instructorLabel];
+           
+//           yEdge += 20;
+           _tableView  = [[UITableView alloc] init];
+           _tableView.dataSource = self;
+           _tableView.delegate = self;
+           _tableView.showsVerticalScrollIndicator = NO;
+           _tableView.alwaysBounceVertical = NO;
+           _tableView.frame = CGRectMake(0, yEdge, self.view.frame.size.width, cellHeight);
+           [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
+           [_scrollView addSubview:_tableView];
 
-                             
-                             _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, yEdge + [self.navigationController navigationBar].frame.size.height + 40);
 
-                             
-                             
-                           } else {
-                             // update the UI to indicate error
-                           }
-                         }];
+           
+           _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, yEdge + [self.navigationController navigationBar].frame.size.height + 40);
+
+           
+           
+         } else {
+           // update the UI to indicate error
+         }
+       }];
 
 }
 
-//#pragma mark - UITableViewDelegate
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//  
-//
-//}
-//
-//#pragma mark - UITableViewDataSource
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//
-//}
-//
-//-(UITableViewCell *)tableView:(UITableView *)tableView
-//        cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//  UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
-//  
-//  NSArray *allKeys = [_courseDict allKeys];
-//  NSLog(@"%@", _prof[@"courses"][0]);
-//  NSString *courseKey = courseCode[indexPath.item];
-//  NSString *courseName = [_courseDict objectForKey:courseKey];
-//  
-//  
-//  
-//  if (cell == nil) {
-//    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellIdentifier];
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//  }
-//  cell = [[CourseCell alloc] initWithCourseID: courseKey
-//                                   courseName: courseName];
-//  
-//  return cell;
-//}
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+  ProfVC *profVC = [[ProfVC alloc] initWithProfessorKey:_profKey];
+  [self.navigationController pushViewController:profVC animated:YES];
+  [_tableView deselectRowAtIndexPath:indexPath animated:NO];
+  
+
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return cellHeight;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView
+        cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+  
+  
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdentifier];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+  }
+  
+  NSLog(@"profName is %@", _profName);
+  cell = [[ProfCell alloc] initWithFullName:_profName];
+  
+  return cell;
+}
 
 
 @end

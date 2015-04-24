@@ -84,7 +84,9 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSString *first = [Util intoLowerCaseExceptForFirstLetter:prof[@"first"]];
   NSString *last = prof[@"last"];
   NSDictionary *courseDict;
-//  NSURL *profPicURL = prof[@"profile_photo"];
+
+  NSURL *profPicURL = prof[@"profile_photo"];
+  
 //  NSData *data = [NSData dataWithContentsOfURL:profPicURL];
 //  UIImage *img = [[UIImage alloc] initWithData:data];
 
