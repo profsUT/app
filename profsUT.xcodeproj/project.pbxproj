@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1115A6E41ADE0F3500AA3A59 /* ClassFeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1115A6E31ADE0F3500AA3A59 /* ClassFeedVC.m */; };
+		1115A6E71ADE10B800AA3A59 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 1115A6E61ADE10B800AA3A59 /* Course.m */; };
+		1115A6EA1ADE174200AA3A59 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1115A6E91ADE174200AA3A59 /* CourseCell.m */; };
+		1115A6ED1ADE2A3500AA3A59 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1115A6EC1ADE2A3500AA3A59 /* TabBarController.m */; };
+		1115A6EF1ADE368E00AA3A59 /* profIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1115A6EE1ADE368E00AA3A59 /* profIcon.png */; };
+		1115A6F21ADE3E9700AA3A59 /* CourseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1115A6F11ADE3E9600AA3A59 /* CourseVC.m */; };
+		1115A6F41ADE48ED00AA3A59 /* courseIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1115A6F31ADE48ED00AA3A59 /* courseIcon.png */; };
 		CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF341AAED392006D08EB /* FeedVC.m */; };
 		CD1FFF491AAED392006D08EB /* Professor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF391AAED392006D08EB /* Professor.m */; };
 		CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */ = {isa = PBXBuildFile; fileRef = CD1FFF3C1AAED392006D08EB /* sample.mov */; };
@@ -37,6 +44,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1115A6E21ADE0F3500AA3A59 /* ClassFeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassFeedVC.h; sourceTree = "<group>"; };
+		1115A6E31ADE0F3500AA3A59 /* ClassFeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassFeedVC.m; sourceTree = "<group>"; };
+		1115A6E51ADE10B800AA3A59 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
+		1115A6E61ADE10B800AA3A59 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
+		1115A6E81ADE174200AA3A59 /* CourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseCell.h; sourceTree = "<group>"; };
+		1115A6E91ADE174200AA3A59 /* CourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCell.m; sourceTree = "<group>"; };
+		1115A6EB1ADE2A3500AA3A59 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		1115A6EC1ADE2A3500AA3A59 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		1115A6EE1ADE368E00AA3A59 /* profIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profIcon.png; sourceTree = "<group>"; };
+		1115A6F01ADE3E9600AA3A59 /* CourseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseVC.h; sourceTree = "<group>"; };
+		1115A6F11ADE3E9600AA3A59 /* CourseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseVC.m; sourceTree = "<group>"; };
+		1115A6F31ADE48ED00AA3A59 /* courseIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = courseIcon.png; sourceTree = "<group>"; };
 		CD1FFF331AAED392006D08EB /* FeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedVC.h; sourceTree = "<group>"; };
 		CD1FFF341AAED392006D08EB /* FeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedVC.m; sourceTree = "<group>"; };
 		CD1FFF381AAED392006D08EB /* Professor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Professor.h; sourceTree = "<group>"; };
@@ -102,6 +121,8 @@
 		CD251C7B1AA2631B0062E2BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1115A6F31ADE48ED00AA3A59 /* courseIcon.png */,
+				1115A6EE1ADE368E00AA3A59 /* profIcon.png */,
 				CD1FFF3C1AAED392006D08EB /* sample.mov */,
 				CD9E129A1AC278A6004363A6 /* quigley.png */,
 				CD251C651AA258850062E2BC /* Default-568h@2x.png */,
@@ -135,14 +156,24 @@
 			children = (
 				CD8074141AA25423007E334A /* AppDelegate.h */,
 				CD8074151AA25423007E334A /* AppDelegate.m */,
+				1115A6EB1ADE2A3500AA3A59 /* TabBarController.h */,
+				1115A6EC1ADE2A3500AA3A59 /* TabBarController.m */,
 				CD1FFF331AAED392006D08EB /* FeedVC.h */,
 				CD1FFF341AAED392006D08EB /* FeedVC.m */,
+				1115A6E21ADE0F3500AA3A59 /* ClassFeedVC.h */,
+				1115A6E31ADE0F3500AA3A59 /* ClassFeedVC.m */,
+				1115A6E81ADE174200AA3A59 /* CourseCell.h */,
+				1115A6E91ADE174200AA3A59 /* CourseCell.m */,
 				CD9E129C1AC27E96004363A6 /* ProfCell.h */,
 				CD9E129D1AC27E96004363A6 /* ProfCell.m */,
+				1115A6F01ADE3E9600AA3A59 /* CourseVC.h */,
+				1115A6F11ADE3E9600AA3A59 /* CourseVC.m */,
 				CD251C6A1AA25AFF0062E2BC /* ProfVC.h */,
 				CD251C6B1AA25AFF0062E2BC /* ProfVC.m */,
 				CD1FFF381AAED392006D08EB /* Professor.h */,
 				CD1FFF391AAED392006D08EB /* Professor.m */,
+				1115A6E51ADE10B800AA3A59 /* Course.h */,
+				1115A6E61ADE10B800AA3A59 /* Course.m */,
 				CD251C7B1AA2631B0062E2BC /* Resources */,
 				CD251C711AA2607F0062E2BC /* Util */,
 				CD80741D1AA25423007E334A /* Images.xcassets */,
@@ -263,7 +294,9 @@
 				CD251C841AA26C5F0062E2BC /* settings.png in Resources */,
 				CD251C7D1AA2675C0062E2BC /* Copse.ttf in Resources */,
 				CD251C661AA258850062E2BC /* Default-568h@2x.png in Resources */,
+				1115A6F41ADE48ED00AA3A59 /* courseIcon.png in Resources */,
 				CD251C831AA26C5F0062E2BC /* search.png in Resources */,
+				1115A6EF1ADE368E00AA3A59 /* profIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,13 +316,18 @@
 			files = (
 				CD8074161AA25423007E334A /* AppDelegate.m in Sources */,
 				CD1FFF491AAED392006D08EB /* Professor.m in Sources */,
+				1115A6ED1ADE2A3500AA3A59 /* TabBarController.m in Sources */,
 				CD251C7A1AA261170062E2BC /* UIColor+profsUT.m in Sources */,
+				1115A6E71ADE10B800AA3A59 /* Course.m in Sources */,
 				CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */,
 				CD9E129E1AC27E96004363A6 /* ProfCell.m in Sources */,
 				CD8074131AA25423007E334A /* main.m in Sources */,
 				CD251C6C1AA25AFF0062E2BC /* ProfVC.m in Sources */,
+				1115A6EA1ADE174200AA3A59 /* CourseCell.m in Sources */,
 				CD251C801AA268640062E2BC /* Constants.m in Sources */,
 				CD1FFF4F1AAED392006D08EB /* Util.m in Sources */,
+				1115A6E41ADE0F3500AA3A59 /* ClassFeedVC.m in Sources */,
+				1115A6F21ADE3E9700AA3A59 /* CourseVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

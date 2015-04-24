@@ -5,6 +5,8 @@
 #import "ProfVC.h"
 #import "Util.h"
 
+@import CoreGraphics;
+
 static NSString *kCellIdentifier = @"Cell Identifier";
 
 @implementation FeedVC {
@@ -16,7 +18,14 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   self = [super init];
   if (self) {
     _professor = [Professor sharedInstance];
+    // Set the title for the tab
+    self.title = @"Professors";
+    // Set the image icon for the tab
+    UIImage *tabImage = [UIImage imageNamed:@"profIcon.png"];
+    UIImage *scaledImage = [Util imageWithImage:tabImage scaledToSize:CGSizeMake(25,25)];
+    self.tabBarItem.image = scaledImage;
   }
+  
   return self;
 }
 
@@ -30,7 +39,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   
   self.view.backgroundColor = [UIColor whiteColor];
   
-  self.navigationItem.title = @"profsUT";
+  self.navigationItem.title = @"Professors";
   UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@""
                                                                  style:UIBarButtonItemStylePlain
                                                                 target:nil
@@ -52,7 +61,8 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NSDictionary *prof = _professor.profsArray[indexPath.item];
-  ProfVC *profVC = [[ProfVC alloc] initWithDictionary:prof];
+  NSString *profKey = prof[@"id"];
+  ProfVC *profVC = [[ProfVC alloc] initWithProfessorKey:profKey];
   [self.navigationController pushViewController:profVC animated:YES];
   [_tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
@@ -71,19 +81,30 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   ProfCell *cell = [_tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
   
   NSDictionary *prof = _professor.profsArray[indexPath.item];
-  NSString *first = prof[@"first"];
-  NSString *last = [Util intoLowerCaseExceptForFirstLetter:prof[@"last"]];
-  NSDictionary *courseDict = prof[@"courses"];
-  NSMutableArray *courses = [[NSMutableArray alloc] init];
-  
-  for (NSDictionary *course in courseDict) {
-    NSString *courseID = course[@"courseID"];
-    [courses addObject:courseID];
+  NSString *first = [Util intoLowerCaseExceptForFirstLetter:prof[@"first"]];
+  NSString *last = prof[@"last"];
+  NSDictionary *courseDict;
+//  NSURL *profPicURL = prof[@"profile_photo"];
+//  NSData *data = [NSData dataWithContentsOfURL:profPicURL];
+//  UIImage *img = [[UIImage alloc] initWithData:data];
+
+
+  unsigned long totalCourses = [prof[@"courses"] count];
+  NSMutableArray *courseIDs = [[NSMutableArray alloc] init];
+  NSMutableArray *courseNames = [[NSMutableArray alloc] init];
+  for (unsigned long i = 0; i < totalCourses; i++) {
+    NSString *courseID = prof[@"courses"][i][@"courseID"];
+    NSString *courseName = prof[@"courses"][i][@"courseName"];
+    
+    [courseIDs addObject:courseID];
+    [courseNames addObject:courseName];
   }
+  
+  courseDict = [NSDictionary dictionaryWithObjects: courseNames forKeys:courseIDs];
   
   cell = [[ProfCell alloc] initWithFirstName:first
                                     lastName:last
-                                     courses:courses
+                                     courses:courseDict
                                        image:[UIImage imageNamed:@"quigley.png"]];
   
   return cell;

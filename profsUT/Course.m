@@ -1,6 +1,6 @@
-#import "Professor.h"
+#import "Course.h"
 
-@implementation Professor {
+@implementation Course {
   NSMutableData *_responseData;
 }
 
@@ -9,20 +9,20 @@
   if (self) {
     _responseData = [NSMutableData data];
     NSURLRequest *request =
-        [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://djangoprofs-env.elasticbeanstalk.com/profsUT/api/instructors/"]];
+    [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://djangoprofs-env.elasticbeanstalk.com/profsUT/api/courses/"]];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-
+    
   }
   return self;
 }
 
 + (instancetype)sharedInstance {
-  static Professor *sharedProfessor = nil;
+  static Course *sharedCourse = nil;
   @synchronized(self) {
-    if (sharedProfessor == nil)
-      sharedProfessor = [[self alloc] init];
+    if (sharedCourse == nil)
+      sharedCourse = [[self alloc] init];
   }
-  return sharedProfessor;
+  return sharedCourse;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -45,28 +45,24 @@
   
   // convert to JSON
   NSError *myError = nil;
-  _profsArray = [NSJSONSerialization JSONObjectWithData:_responseData
-                                                      options:NSJSONReadingMutableLeaves
-                                                        error:&myError];
+  _coursesArray = [NSJSONSerialization JSONObjectWithData:_responseData
+                                                options:NSJSONReadingMutableLeaves
+                                                  error:&myError];
   
-//  NSLog(@"%@", _profsArray);
+  //  NSLog(@"%@", _profsArray);
   
-  // sort by last name
-  NSSortDescriptor *brandDescriptor = [[NSSortDescriptor alloc] initWithKey:@"last" ascending:YES];
+  // sort by course name
+  NSSortDescriptor *brandDescriptor = [[NSSortDescriptor alloc] initWithKey:@"courseName" ascending:YES];
   NSArray *sortDescriptors = [NSArray arrayWithObject:brandDescriptor];
-  _profsArray = [_profsArray sortedArrayUsingDescriptors:sortDescriptors];
+  _coursesArray = [_coursesArray sortedArrayUsingDescriptors:sortDescriptors];
   
   [[NSNotificationCenter defaultCenter] postNotificationName:@"NSURLConnectionDidFinish"
                                                       object:nil];
   
-//  NSLog(@"------------------------------------");
-//  NSLog(@"------------------------------------");
-//  NSLog(@"------------------------------------");
-//  NSLog(@"%@", _profsArray);
   
-//  for (id object in res) {
-//    NSLog(@"class: %@", NSStringFromClass([object class]));
-//  }
+  //  for (id object in res) {
+  //    NSLog(@"class: %@", NSStringFromClass([object class]));
+  //  }
 }
 
 @end

@@ -1,6 +1,8 @@
 #import "AppDelegate.h"
 
-#import "FeedVC.h"
+//#import "FeedVC.h"
+//#import "ClassFeedVC.h"
+//#import "TabBarController.h"
 #import "Constants.h"
 #import "UIColor+profsUT.h"
 
@@ -11,13 +13,38 @@
 @implementation AppDelegate
 
 
+@synthesize tabBarController;
+@synthesize firstViewController, secondViewController, thirdViewController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];
   
-  FeedVC *feedVC = [[FeedVC alloc] init];
+  // Tab bar stuff
+  self.firstViewController = [[FeedVC alloc] init];
+  self.secondViewController = [[ClassFeedVC alloc] init];
+//  self.thirdViewController = [[ProfVC alloc] init];
+  
+  NSArray *myViewControllers = [[NSArray alloc] initWithObjects:
+                                self.firstViewController,
+                                self.secondViewController, nil];
+  
+  
+  // Initialize the tab bar controller
+  self.tabBarController = [[TabBarController alloc] init];
+  
+  // Set the view controllers for the tab bar controller
+  [self.tabBarController setViewControllers:myViewControllers];
+  
+  // Add the tab bar controllers view to the window
+  [self.window addSubview:self.tabBarController.view];
+  // End tab bar stuff
+  
+//  ClassFeedVC *feedVC = [[ClassFeedVC alloc] init];
+//  UINavigationController *navController =
+//      [[UINavigationController alloc] initWithRootViewController:feedVC];
   UINavigationController *navController =
-      [[UINavigationController alloc] initWithRootViewController:feedVC];
+  [[UINavigationController alloc] initWithRootViewController:tabBarController];
   UINavigationBar *navBar = navController.navigationBar;
   navBar.barTintColor = [UIColor burntOrangeColor];
   navBar.tintColor = [UIColor whiteColor];
