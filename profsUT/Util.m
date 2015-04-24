@@ -4,18 +4,26 @@
 
 + (NSString *)intoLowerCaseExceptForFirstLetter:(NSString *)string {
   
+  NSMutableString *newString = [NSMutableString stringWithCapacity:100];
+  
   // Split whitespace separated words
   NSArray *wordsAndEmptyStrings = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
   NSArray *words = [wordsAndEmptyStrings filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"length > 0"]];
   
-  NSString* lower;
   if (string && [string length] > 0) {
-//    for (NSString *word in words) {
-//      
-//    }
-    NSString *lower = [string lowercaseString];
-    return [lower stringByReplacingCharactersInRange:NSMakeRange(0,1)
-                                           withString:[[lower substringToIndex:1] capitalizedString]];
+    int counter = 0;
+    for (NSString *word in words) {
+      NSString *lower = [word lowercaseString];
+      NSString *capitalized = [lower stringByReplacingCharactersInRange:NSMakeRange(0,1)
+                                                             withString:[[lower substringToIndex:1] capitalizedString]];
+      if (counter != 0) {
+        [newString appendString:@" "];
+      }
+      [newString appendString:capitalized];
+      counter++;
+    }
+    
+    return newString;
   } else {
     return @"";
   }

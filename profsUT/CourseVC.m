@@ -8,9 +8,12 @@ static CGFloat leftPadding = 15.0;
 static CGFloat topPadding = 10.0;
 static CGFloat sectionBreak = 20.0;
 
+static NSString *kCellIdentifier = @"Cell Identifier";
+
 @implementation CourseVC {
 
   UIScrollView *_scrollView;
+  UITableView *_tableView;
   NSInteger _index;
   NSDictionary *_prof;
 
@@ -36,8 +39,6 @@ static CGFloat sectionBreak = 20.0;
 
 -(instancetype)initWithCourseKey:(NSString *)courseKey {
   _courseKey = courseKey;
-  
-  NSLog(@"fdsafdsa%@", courseKey);
   
   _requestURL = [NSString stringWithFormat:@"http://djangoprofs-env.elasticbeanstalk.com/profsUT/api/courses/%@", courseKey];
   
@@ -85,7 +86,7 @@ static CGFloat sectionBreak = 20.0;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   NSLog(@"connectionDidFinishLoading");
-  NSLog(@"Succeeded! Received %lu bytes of data", [_responseData length]);
+  NSLog(@"Succeeded! Received %lu bytes of data", (unsigned long)[_responseData length]);
   
   // convert to JSON
   NSError *myError = nil;
@@ -229,5 +230,42 @@ static CGFloat sectionBreak = 20.0;
                          }];
 
 }
+
+//#pragma mark - UITableViewDelegate
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//  
+//
+//}
+//
+//#pragma mark - UITableViewDataSource
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//
+//}
+//
+//-(UITableViewCell *)tableView:(UITableView *)tableView
+//        cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//  UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+//  
+//  NSArray *allKeys = [_courseDict allKeys];
+//  NSLog(@"%@", _prof[@"courses"][0]);
+//  NSString *courseKey = courseCode[indexPath.item];
+//  NSString *courseName = [_courseDict objectForKey:courseKey];
+//  
+//  
+//  
+//  if (cell == nil) {
+//    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellIdentifier];
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//  }
+//  cell = [[CourseCell alloc] initWithCourseID: courseKey
+//                                   courseName: courseName];
+//  
+//  return cell;
+//}
+
 
 @end

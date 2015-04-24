@@ -61,7 +61,8 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NSDictionary *prof = _professor.profsArray[indexPath.item];
-  ProfVC *profVC = [[ProfVC alloc] initWithDictionary:prof];
+  NSString *profKey = prof[@"id"];
+  ProfVC *profVC = [[ProfVC alloc] initWithProfessorKey:profKey];
   [self.navigationController pushViewController:profVC animated:YES];
   [_tableView deselectRowAtIndexPath:indexPath animated:NO];
 }

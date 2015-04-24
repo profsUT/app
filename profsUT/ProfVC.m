@@ -22,57 +22,100 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSInteger _index;
   NSDictionary *_prof;
   
+  // Variables pertaining to API call
+  NSString *_profKey;
+  NSString *_requestURL;
+  NSURLRequest *_request;
+  
   NSString *_first;
   NSString *_last;
   NSMutableArray *_courses;
   
   NSDictionary *_courseDict;
-  NSMutableArray *courseCode;
+  NSMutableArray *_courseCodes;
   NSMutableArray *_courseNames;
+  
+  NSMutableData *_responseData;
   
   CGFloat yEdge;
 }
 
 - (instancetype)initWithDictionary:(NSDictionary *)prof {
-  self = [super init];
-  if (self) {
-    _courses = [[NSMutableArray alloc] init];
-    courseCode = [[NSMutableArray alloc] init];
-    _courseNames = [[NSMutableArray alloc] init];
-    
-    _prof = prof;
-    
-    _first = _prof[@"first"];
-    _last = [Util intoLowerCaseExceptForFirstLetter:_prof[@"last"]];
-
-    unsigned long totalCourses = [_prof[@"courses"] count];
-    for (unsigned long i = 0; i < totalCourses; i++) {
-      NSString *courseID = _prof[@"courses"][i][@"courseID"];
-      NSString *courseName = _prof[@"courses"][i][@"courseName"];
-      NSString *course = [NSString stringWithFormat:@"%@: %@", courseID, courseName];
-      
-      [_courses addObject:course];
-      [courseCode addObject:courseID];
-      [_courseNames addObject:courseName];
-
-    }
-    
-    _courseDict = [NSDictionary dictionaryWithObjects: _courseNames forKeys:courseCode];
-
-    
-  }
+//  self = [super init];
+//  if (self) {
+//    _courses = [[NSMutableArray alloc] init];
+//    courseCode = [[NSMutableArray alloc] init];
+//    _courseNames = [[NSMutableArray alloc] init];
+//    
+//    _prof = prof;
+//    
+//    _first = _prof[@"first"];
+//    _last = [Util intoLowerCaseExceptForFirstLetter:_prof[@"last"]];
+//    
+//    unsigned long totalCourses = [_prof[@"courses"] count];
+//    for (unsigned long i = 0; i < totalCourses; i++) {
+//      NSString *courseID = _prof[@"courses"][i][@"courseID"];
+//      NSString *courseName = _prof[@"courses"][i][@"courseName"];
+//      NSString *course = [NSString stringWithFormat:@"%@: %@", courseID, courseName];
+//      
+//      [_courses addObject:course];
+//      [courseCode addObject:courseID];
+//      [_courseNames addObject:courseName];
+//      
+//    }
+//    
+//    _courseDict = [NSDictionary dictionaryWithObjects: _courseNames forKeys:courseCode];
+//    
+//    
+//  }
   return self;
 }
 
+
+- (instancetype) initWithProfessorKey:(NSString *)profKey {
+  _profKey = profKey;
+  
+  _requestURL = [NSString stringWithFormat:@"http://djangoprofs-env.elasticbeanstalk.com/profsUT/api/instructors/%@", profKey];
+  
+  // Change request URL to requestURL
+  _request =
+  [NSURLRequest requestWithURL:[NSURL URLWithString:_requestURL]];
+  
+  
+  return self;
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+  NSLog(@"didReceiveResponse");
+  [_responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+  [_responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+  NSLog(@"didFailWithError");
+  NSLog(@"Connection failed: %@", [error description]);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+  NSLog(@"connectionDidFinishLoading");
+  NSLog(@"Succeeded! Received %lu bytes of data", (unsigned long)[_responseData length]);
+  
+  // convert to JSON
+  NSError *myError = nil;
+
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"NSURLConnectionDidFinish"
+                                                      object:nil];
+}
 
 // To-Do Access HLS video from our back-end
 -(void)playVideoFromURL {
   
   NSLog(@"Called playVideoFromURL\n");
-//  NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"mov"];
   NSURL *streamURL = [NSURL URLWithString:@"https://s3.amazonaws.com/django-profs-prod/video/hls/5.m3u8"];
-//  _moviePlayer =  [[MPMoviePlayerController alloc]
-//                   initWithContentURL:[NSURL fileURLWithPath:path]];
+
   _moviePlayer = [[MPMoviePlayerController alloc]
                   initWithContentURL:streamURL];
   
@@ -86,7 +129,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   _moviePlayer.controlStyle = MPMovieControlStyleDefault;
   _moviePlayer.shouldAutoplay = NO;
   [_scrollView addSubview:_moviePlayer.view];
-  [_moviePlayer setFullscreen:YES animated:YES];
+  [_moviePlayer setFullscreen:NO animated:YES];
   yEdge += _moviePlayer.view.frame.size.height + sectionBreak;
 }
 
@@ -106,96 +149,118 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  //  [self playVideoWithId:@"sLVGweQU7rQ"];
-  
-  // Position video on view
-  
-//  CGFloat yEdge;
   
   self.view.backgroundColor = [UIColor whiteColor];
   
-  self.navigationItem.title = _last;
-  
-  _scrollView = [[UIScrollView alloc] init];
-  _scrollView.frame = self.view.frame;
-  _scrollView.showsVerticalScrollIndicator = NO;
-  [self.view addSubview:_scrollView];
-  
-  yEdge = sectionBreak;
-  
-  
-  UILabel *nameLabel = [[UILabel alloc] init];
-  nameLabel.text = [NSString stringWithFormat:@"%@ %@", _first, _last];
-  nameLabel.font = [UIFont fontWithName:@"Copse" size:kH1FontSize];
-  [nameLabel sizeToFit];
-  nameLabel.frame = CGRectMake(leftPadding, yEdge,
-                               nameLabel.bounds.size.width, nameLabel.bounds.size.height);
-  [_scrollView addSubview:nameLabel];
-  
-  yEdge += nameLabel.frame.size.height + topPadding;
-  
-  [self playVideoFromURL];
-    
-  
-  UILabel *courseLabel = [[UILabel alloc] init];
-  courseLabel.text = @"Courses";
-  courseLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
-  [courseLabel sizeToFit];
-  courseLabel.frame = CGRectMake(15.0, yEdge, courseLabel.bounds.size.width, courseLabel.bounds.size.height);
-  [_scrollView addSubview:courseLabel];
 
-  yEdge += courseLabel.frame.size.height + topPadding;
   
-//  int currentIdx = 0; // Keep track of current index
-//  for (NSString *course in _courseDict) {
-//
-//    NSString *courseName = [_courseDict objectForKey:course];
-//    UILabel *courseIDLabel = [[UILabel alloc] init];
-//
-//    courseIDLabel.numberOfLines = 0;
-//    courseIDLabel.text = [NSString stringWithFormat:@"%@", course];
-//    courseIDLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:kPFontSize];
-//    [courseIDLabel sizeToFit];
-//    courseIDLabel.frame = CGRectMake(15.0, yEdge,
-//                                   courseIDLabel.bounds.size.width, courseIDLabel.bounds.size.height);
-//    [_scrollView addSubview:courseIDLabel];
-//    
-//    yEdge += courseIDLabel.frame.size.height;
-//    
-//    UILabel *courseNameLabel = [[UILabel alloc] init];
-//    courseNameLabel.text = courseName;
-//    courseNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:kPFontSize];
-//    [courseNameLabel sizeToFit];
-//    courseNameLabel.frame = CGRectMake(15.0, yEdge,
-//                                     courseNameLabel.bounds.size.width, courseNameLabel.bounds.size.height);
-//    [_scrollView addSubview:courseNameLabel];
-//    
-//    yEdge += courseNameLabel.frame.size.height + topPadding;
-//    
-//    currentIdx++;
-//  }
+  NSURLResponse *requestResponse;
   
-  yEdge -= 10;
-  _tableView  = [[UITableView alloc] init];
-  _tableView.dataSource = self;
-  _tableView.delegate = self;
-  _tableView.showsVerticalScrollIndicator = NO;
-  _tableView.frame = CGRectMake(0, yEdge, self.view.frame.size.width-15.0, 100.0*[_courseDict count]);
-  [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
-  [_scrollView addSubview:_tableView];
-  
-//  UITableView *coursesTable = [[UITableView alloc] init];
-  
-  
-  _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, yEdge + [self.navigationController navigationBar].frame.size.height + 40 + _tableView.frame.size.height/2);
+  NSData *requestHandler = [NSURLConnection sendSynchronousRequest:_request returningResponse:&requestResponse error:nil];
+  // optionally update the UI to say 'busy', e.g. placeholders or activity
+  // indicators in parts that are incomplete until the response arrives
+  [NSURLConnection sendAsynchronousRequest:_request
+                                     queue:[NSOperationQueue mainQueue]
+                         completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+               if (!error) {
+                 // update the UI here (and only here to the extent it depends on the json)
+                 NSError *e = nil;
+                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData: requestHandler options: NSJSONReadingMutableContainers error: &e];
+                 
+                 _scrollView = [[UIScrollView alloc] init];
+                 _scrollView.frame = self.view.frame;
+                 _scrollView.showsVerticalScrollIndicator = NO;
+                 _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, yEdge + [self.navigationController navigationBar].frame.size.height + 40);
+                 [self.view addSubview:_scrollView];
+                 
+                 yEdge = sectionBreak;
+                 
+                 _courses = [[NSMutableArray alloc] init];
+                 _courseCodes = [[NSMutableArray alloc] init];
+                 _courseNames = [[NSMutableArray alloc] init];
+                 
+                 // Populate courses dictionary
+                 
+                 _prof = json;
+                 NSLog(@"%@", _prof);
+                 
+                 unsigned long totalCourses = [_prof[@"courses"] count];
+                 NSLog(@"Total courses are: %lu", totalCourses);
+                 
+                 for (unsigned long i = 0; i < totalCourses; i++) {
+                   NSString *courseID = _prof[@"courses"][i][@"courseID"];
+                   NSString *courseName = _prof[@"courses"][i][@"courseName"];
+                   NSString *course = [NSString stringWithFormat:@"%@: %@", courseID, courseName];
+                   NSLog(@"Course ID, Course Name: %@, %@", courseID, courseName);
+                   
+                   [_courses addObject:course];
+                   [_courseCodes addObject:courseID];
+                   [_courseNames addObject:courseName];
+                 }
+                 
+                 _courseDict = [NSDictionary dictionaryWithObjects: _courseNames forKeys:_courseCodes];
+                 
+                 _first = _prof[@"first"];
+                 _last = _prof[@"last"];
+                 
+                 // Add last name to navigation bar
+                 self.navigationItem.title = _last;
+
+                 UILabel *nameLabel = [[UILabel alloc] init];
+                 nameLabel.text = [NSString stringWithFormat:@"%@ %@", _first, _last];
+                 nameLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+                 [nameLabel sizeToFit];
+                 nameLabel.frame = CGRectMake(leftPadding, yEdge,
+                                              nameLabel.bounds.size.width, nameLabel.bounds.size.height);
+                 [_scrollView addSubview:nameLabel];
+                 
+                 yEdge += nameLabel.frame.size.height + topPadding;
+                 
+                 [self playVideoFromURL];
+                 
+                 UILabel *courseLabel = [[UILabel alloc] init];
+                 courseLabel.text = @"Courses";
+                 courseLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+                 [courseLabel sizeToFit];
+                 courseLabel.frame = CGRectMake(15.0, yEdge, courseLabel.bounds.size.width, courseLabel.bounds.size.height);
+                 [_scrollView addSubview:courseLabel];
+               
+                 yEdge += courseLabel.frame.size.height + topPadding;
+                 
+                 yEdge -= 10;
+                 _tableView  = [[UITableView alloc] init];
+                 _tableView.dataSource = self;
+                 _tableView.delegate = self;
+                 _tableView.showsVerticalScrollIndicator = NO;
+                 _tableView.alwaysBounceVertical = NO;
+                 _tableView.frame = CGRectMake(0, yEdge, self.view.frame.size.width, cellHeight*[_prof[@"courses"] count]);
+                 [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
+                 [_scrollView addSubview:_tableView];
+
+
+                 _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, yEdge + [self.navigationController navigationBar].frame.size.height + 40 + _tableView.frame.size.height);
+                 
+               } else {
+                 // update the UI to indicate error
+                 UILabel *errorLabel = [[UILabel alloc] init];
+                 errorLabel.text = @"Error: The professor could not be loaded.";
+                 errorLabel.font = [UIFont fontWithName:@"Copse" size:16];
+                 [errorLabel sizeToFit];
+                 errorLabel.frame = CGRectMake(15.0, self.view.frame.size.height/2, errorLabel.bounds.size.width, errorLabel.bounds.size.height);
+                 
+                 
+                 [_scrollView addSubview:errorLabel];
+
+               }
+            }];
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  
+
+  // To Do: Get correct primary key for course here when API is updated
   NSString *courseKey = _prof[@"courses"][indexPath.item][@"id"];
   
-//  NSLog(@"%@", _prof[@"courses"][indexPath.item]);
   CourseVC *courseVC = [[CourseVC alloc] initWithCourseKey:courseKey];
   [self.navigationController pushViewController:courseVC animated:YES];
   [_tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -203,7 +268,8 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [_courseDict count];
+  NSLog(@"Total count is: %lu", [_prof[@"courses"] count]);
+  return [_prof[@"courses"] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -214,35 +280,17 @@ static NSString *kCellIdentifier = @"Cell Identifier";
         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
   
-  NSArray *allKeys = [_courseDict allKeys];
-  NSLog(@"%@", _prof[@"courses"][0]);
-  NSString *courseKey = courseCode[indexPath.item];
+  NSString *courseKey = _courseCodes[indexPath.item];
   NSString *courseName = [_courseDict objectForKey:courseKey];
   
-  
-  // Number of courses
-  unsigned long numCourses = [_courses count];
-  for (unsigned long i = 0; i < numCourses; i++) {
-  
-  }
-  
-//  for (NSString *course in _courseDict) {
-//    
-//    NSString *courseName = [_courseDict objectForKey:course];
-//  }
-
-
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
+  
   cell = [[CourseCell alloc] initWithCourseID: courseKey
                                    courseName: courseName];
-//
-//  cell.textLabel.text = courseCode;
-//  cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:kPFontSize];
-//  cell.detailTextLabel.text = @"fdsafads";
-  
+
   return cell;
 }
 

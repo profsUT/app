@@ -6,6 +6,7 @@
 
 // designated initializer
 - (instancetype)initWithDictionary:(NSDictionary *)prof;
+- (instancetype) initWithProfessorKey:(NSString *)profKey;
 @property(strong, nonatomic) MPMoviePlayerController *moviePlayer;
 
 @end
