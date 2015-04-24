@@ -114,13 +114,13 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 }
 
 // To-Do Access HLS video from our back-end
--(void)playVideoFromURL {
+-(void)playVideoFromURL:(NSString *) streamURL {
   
   NSLog(@"Called playVideoFromURL\n");
-  NSURL *streamURL = [NSURL URLWithString:@"https://s3.amazonaws.com/django-profs-prod/video/hls/5.m3u8"];
+  NSURL *URL = [NSURL URLWithString:streamURL];
 
   _moviePlayer = [[MPMoviePlayerController alloc]
-                  initWithContentURL:streamURL];
+                  initWithContentURL:URL];
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(moviePlayBackDidFinish:)
@@ -219,7 +219,13 @@ static NSString *kCellIdentifier = @"Cell Identifier";
                  
                  yEdge += nameLabel.frame.size.height + topPadding;
                  
-                 [self playVideoFromURL];
+                 // If at least one video for this professor exists
+                 if ([_prof[@"video"] count] > 0) {
+                   NSString *videoURL = _prof[@"video"][0][@"video_url"];
+                   [self playVideoFromURL:videoURL];
+
+                 }
+              
                  
                  UILabel *courseLabel = [[UILabel alloc] init];
                  courseLabel.text = @"Courses";
@@ -265,6 +271,9 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSString *courseKey = _prof[@"courses"][indexPath.item][@"id"];
   
   CourseVC *courseVC = [[CourseVC alloc] initWithCourseKey:courseKey showInstructor:(int) 0];
+  
+  // To do: Stop video playback when changing transitioning controllers.
+  
   [self.navigationController pushViewController:courseVC animated:YES];
   [_tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
