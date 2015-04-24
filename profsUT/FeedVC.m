@@ -84,8 +84,16 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSString *first = [Util intoLowerCaseExceptForFirstLetter:prof[@"first"]];
   NSString *last = prof[@"last"];
   NSDictionary *courseDict;
-
-  NSURL *profPicURL = prof[@"profile_photo"];
+  NSString *profPicURL;
+  
+  if ([prof[@"profile_photo"] isEqual:[NSNull null]]) {
+    NSLog(@"Photo does not exist");
+    // send placeholder
+    profPicURL =@"";
+  }
+  else {
+    profPicURL = prof[@"profile_photo"];
+  }
   
 //  NSData *data = [NSData dataWithContentsOfURL:profPicURL];
 //  UIImage *img = [[UIImage alloc] initWithData:data];
@@ -107,7 +115,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   cell = [[ProfCell alloc] initWithFirstName:first
                                     lastName:last
                                      courses:courseDict
-                                       image:[UIImage imageNamed:@"quigley.png"]];
+                                       imageURL:profPicURL];
   
   return cell;
 }

@@ -31,6 +31,7 @@
 		CD80742D1AA25423007E334A /* profsUTTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD80742C1AA25423007E334A /* profsUTTests.m */; };
 		CD9E129B1AC278A6004363A6 /* quigley.png in Resources */ = {isa = PBXBuildFile; fileRef = CD9E129A1AC278A6004363A6 /* quigley.png */; };
 		CD9E129E1AC27E96004363A6 /* ProfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9E129D1AC27E96004363A6 /* ProfCell.m */; };
+		DA97EDB307627F2CEC028330 /* libPods-profsUT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D286B65F64AE42A24D24404D /* libPods-profsUT.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		1115A6F01ADE3E9600AA3A59 /* CourseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseVC.h; sourceTree = "<group>"; };
 		1115A6F11ADE3E9600AA3A59 /* CourseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseVC.m; sourceTree = "<group>"; };
 		1115A6F31ADE48ED00AA3A59 /* courseIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = courseIcon.png; sourceTree = "<group>"; };
+		11ED4E1F472339D1532BB583 /* Pods-profsUT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-profsUT.release.xcconfig"; path = "Pods/Target Support Files/Pods-profsUT/Pods-profsUT.release.xcconfig"; sourceTree = "<group>"; };
 		CD1FFF331AAED392006D08EB /* FeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedVC.h; sourceTree = "<group>"; };
 		CD1FFF341AAED392006D08EB /* FeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedVC.m; sourceTree = "<group>"; };
 		CD1FFF381AAED392006D08EB /* Professor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Professor.h; sourceTree = "<group>"; };
@@ -85,6 +87,8 @@
 		CD9E129A1AC278A6004363A6 /* quigley.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quigley.png; sourceTree = "<group>"; };
 		CD9E129C1AC27E96004363A6 /* ProfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfCell.h; sourceTree = "<group>"; };
 		CD9E129D1AC27E96004363A6 /* ProfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfCell.m; sourceTree = "<group>"; };
+		D286B65F64AE42A24D24404D /* libPods-profsUT.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-profsUT.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF8DEF8FA1A243B571D9D0AF /* Pods-profsUT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-profsUT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-profsUT/Pods-profsUT.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA97EDB307627F2CEC028330 /* libPods-profsUT.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +144,8 @@
 				CD80740F1AA25423007E334A /* profsUT */,
 				CD8074291AA25423007E334A /* profsUTTests */,
 				CD80740E1AA25423007E334A /* Products */,
+				EA550861B1AEFE4BC3F67933 /* Pods */,
+				DFDCF5E6BB98EDFA14F88BF6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -208,6 +215,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DFDCF5E6BB98EDFA14F88BF6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D286B65F64AE42A24D24404D /* libPods-profsUT.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA550861B1AEFE4BC3F67933 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EF8DEF8FA1A243B571D9D0AF /* Pods-profsUT.debug.xcconfig */,
+				11ED4E1F472339D1532BB583 /* Pods-profsUT.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -215,9 +239,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD8074301AA25423007E334A /* Build configuration list for PBXNativeTarget "profsUT" */;
 			buildPhases = (
+				090331BE24F0B0F685AAC7A8 /* Check Pods Manifest.lock */,
 				CD8074091AA25423007E334A /* Sources */,
 				CD80740A1AA25423007E334A /* Frameworks */,
 				CD80740B1AA25423007E334A /* Resources */,
+				64A098F3B930CB023FAD467D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -308,6 +334,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		090331BE24F0B0F685AAC7A8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		64A098F3B930CB023FAD467D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-profsUT/Pods-profsUT-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CD8074091AA25423007E334A /* Sources */ = {
@@ -428,6 +487,7 @@
 		};
 		CD8074311AA25423007E334A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF8DEF8FA1A243B571D9D0AF /* Pods-profsUT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -439,6 +499,7 @@
 		};
 		CD8074321AA25423007E334A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11ED4E1F472339D1532BB583 /* Pods-profsUT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
