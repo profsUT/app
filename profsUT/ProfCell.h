@@ -9,6 +9,7 @@
 // To do: courses should be array of dicts
 
 // designated initializer
+- (instancetype)initWithFullName:(NSString *)name;
 - (instancetype)initWithFirstName:(NSString *)first
                          lastName:(NSString *)last
                           courses:(NSDictionary *)courses
