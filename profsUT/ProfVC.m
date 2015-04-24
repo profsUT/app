@@ -73,6 +73,9 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 
 
 - (instancetype) initWithProfessorKey:(NSString *)profKey {
+  
+  self = [super init];
+  
   _profKey = profKey;
   
   _requestURL = [NSString stringWithFormat:@"http://djangoprofs-env.elasticbeanstalk.com/profsUT/api/instructors/%@", profKey];
@@ -261,7 +264,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   // To Do: Get correct primary key for course here when API is updated
   NSString *courseKey = _prof[@"courses"][indexPath.item][@"id"];
   
-  CourseVC *courseVC = [[CourseVC alloc] initWithCourseKey:courseKey];
+  CourseVC *courseVC = [[CourseVC alloc] initWithCourseKey:courseKey showInstructor:(int) 0];
   [self.navigationController pushViewController:courseVC animated:YES];
   [_tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
