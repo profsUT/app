@@ -1,3 +1,6 @@
+// To Do: When transitioning from instructor view to course view and then
+// back again, the video fast forwards.
+
 #import "ProfVC.h"
 #import "CourseVC.h"
 
@@ -73,6 +76,9 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 
 
 - (instancetype) initWithProfessorKey:(NSString *)profKey {
+  
+  self = [super init];
+  
   _profKey = profKey;
   
   _requestURL = [NSString stringWithFormat:@"http://djangoprofs-env.elasticbeanstalk.com/profsUT/api/instructors/%@", profKey];
@@ -111,13 +117,12 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 }
 
 // To-Do Access HLS video from our back-end
--(void)playVideoFromURL {
+-(void)playVideoFromURL:(NSString *) streamURL {
   
-  NSLog(@"Called playVideoFromURL\n");
-  NSURL *streamURL = [NSURL URLWithString:@"https://s3.amazonaws.com/django-profs-prod/video/hls/5.m3u8"];
+  NSURL *URL = [NSURL URLWithString:streamURL];
 
   _moviePlayer = [[MPMoviePlayerController alloc]
-                  initWithContentURL:streamURL];
+                  initWithContentURL:URL];
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(moviePlayBackDidFinish:)
@@ -182,16 +187,13 @@ static NSString *kCellIdentifier = @"Cell Identifier";
                  // Populate courses dictionary
                  
                  _prof = json;
-                 NSLog(@"%@", _prof);
                  
                  unsigned long totalCourses = [_prof[@"courses"] count];
-                 NSLog(@"Total courses are: %lu", totalCourses);
                  
                  for (unsigned long i = 0; i < totalCourses; i++) {
                    NSString *courseID = _prof[@"courses"][i][@"courseID"];
                    NSString *courseName = _prof[@"courses"][i][@"courseName"];
                    NSString *course = [NSString stringWithFormat:@"%@: %@", courseID, courseName];
-                   NSLog(@"Course ID, Course Name: %@, %@", courseID, courseName);
                    
                    [_courses addObject:course];
                    [_courseCodes addObject:courseID];
@@ -216,7 +218,13 @@ static NSString *kCellIdentifier = @"Cell Identifier";
                  
                  yEdge += nameLabel.frame.size.height + topPadding;
                  
-                 [self playVideoFromURL];
+                 // If at least one video for this professor exists
+                 if ([_prof[@"video"] count] > 0) {
+                   NSString *videoURL = _prof[@"video"][0][@"video_url"];
+                   [self playVideoFromURL:videoURL];
+
+                 }
+              
                  
                  UILabel *courseLabel = [[UILabel alloc] init];
                  courseLabel.text = @"Courses";
@@ -261,14 +269,17 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   // To Do: Get correct primary key for course here when API is updated
   NSString *courseKey = _prof[@"courses"][indexPath.item][@"id"];
   
-  CourseVC *courseVC = [[CourseVC alloc] initWithCourseKey:courseKey];
+  // Don't show the instructor table cell when moving from professors to their courses
+  CourseVC *courseVC = [[CourseVC alloc] initWithCourseKey:courseKey showInstructor:(int) 0];
+  
+  // To do: Stop video playback when changing transitioning controllers.
+  
   [self.navigationController pushViewController:courseVC animated:YES];
   [_tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  NSLog(@"Total count is: %lu", [_prof[@"courses"] count]);
   return [_prof[@"courses"] count];
 }
 

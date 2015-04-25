@@ -13,6 +13,6 @@
 - (instancetype)initWithFirstName:(NSString *)first
                          lastName:(NSString *)last
                           courses:(NSDictionary *)courses
-                            image:(UIImage *)image;
+                         imageURL:(NSString *)imageURL;
 
 @end

@@ -79,10 +79,12 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSString *profLast = [[course valueForKey:@"instructor"] valueForKey:@"last"];
   NSString *profName = [NSString stringWithFormat:@"%@, %@", profLast, profFirst];
 
-  CourseVC *courseVC = [[CourseVC alloc] initWithCourseID:(NSString *)courseID
-                                               courseName:(NSString *)courseName
-                                                courseKey:(NSString *)courseKey
-                                                 profName:(NSString *)profName];
+//  CourseVC *courseVC = [[CourseVC alloc] initWithCourseID:(NSString *)courseID
+//                                               courseName:(NSString *)courseName
+//                                                courseKey:(NSString *)courseKey
+//                                                 profName:(NSString *)profName];
+
+  CourseVC *courseVC = [[CourseVC alloc] initWithCourseKey:courseKey];
   [self.navigationController pushViewController:courseVC animated:YES];
   [_tableView deselectRowAtIndexPath:indexPath animated:NO];
 }

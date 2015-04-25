@@ -13,6 +13,8 @@ static CGFloat cellHeight = 40.0;
 
 static NSString *kCellIdentifier = @"Cell Identifier";
 
+
+
 @implementation CourseVC {
 
   UIScrollView *_scrollView;
@@ -23,6 +25,8 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSString *_first;
   NSString *_last;
   NSMutableArray *_courses;
+  
+//  BOOL *_showInstructor;
 
   NSDictionary *_courseDict;
   NSString *_courseID;
@@ -42,6 +46,38 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 }
 
 -(instancetype)initWithCourseKey:(NSString *)courseKey {
+  
+  self = [super init];
+  
+  [self setShowInstructor:YES];
+  
+  _courseKey = courseKey;
+  
+  _requestURL = [NSString stringWithFormat:@"http://djangoprofs-env.elasticbeanstalk.com/profsUT/api/courses/%@", courseKey];
+  
+  // Change request URL to requestURL
+  _request =
+  [NSURLRequest requestWithURL:[NSURL URLWithString:_requestURL]];
+  
+  return self;
+  
+}
+
+-(instancetype)initWithCourseKey:(NSString *)courseKey showInstructor:(int)showInstructor {
+  
+  self = [super init];
+  
+  // Define when to show instructors and when not in order to avoid infinite controller transitions
+  // on the navigation stack when going from instructor-courses-instructor-etc...
+  
+  if (showInstructor) {
+    [self setShowInstructor:YES];
+  }
+  else {
+    [self setShowInstructor:NO];
+  }
+
+  
   _courseKey = courseKey;
   
   _requestURL = [NSString stringWithFormat:@"http://djangoprofs-env.elasticbeanstalk.com/profsUT/api/courses/%@", courseKey];
@@ -97,8 +133,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSArray *_courseJSON = [NSJSONSerialization JSONObjectWithData:_responseData
                                                   options:NSJSONReadingMutableLeaves
                                                     error:&myError];
-  
-  NSLog(@"%@", _courseJSON);
+
   [[NSNotificationCenter defaultCenter] postNotificationName:@"NSURLConnectionDidFinish"
                                                       object:nil];
 }
@@ -133,7 +168,8 @@ static NSString *kCellIdentifier = @"Cell Identifier";
            NSDictionary *json = [NSJSONSerialization JSONObjectWithData: requestHandler options: NSJSONReadingMutableContainers error: &e];
            // update the UI here (and only here to the extent it depends on the json)
            
-           NSLog(@"%@", json[@"instructor"][@"first"]);
+           self.navigationItem.title = json[@"courseID"];
+           NSLog(@"%@", json);
            
            NSString *firstName = json[@"instructor"][@"first"];
            NSString *lastName = json[@"instructor"][@"last"];
@@ -159,7 +195,6 @@ static NSString *kCellIdentifier = @"Cell Identifier";
            // Course ID
            UILabel *courseIDLabel = [[UILabel alloc] init];
            courseIDLabel.text = json[@"courseID"];
-           courseIDLabel.text = _courseID;
            courseIDLabel.font = [UIFont fontWithName:@"Copse" size:20];
            [courseIDLabel sizeToFit];
            courseIDLabel.frame = CGRectMake(15.0, yEdge, courseIDLabel.bounds.size.width, courseIDLabel.bounds.size.height);
@@ -186,35 +221,60 @@ static NSString *kCellIdentifier = @"Cell Identifier";
            [_scrollView addSubview:timeLabel];
            
            // To do: Get times from nested JSON
-           UILabel *timeInfo = [[UILabel alloc] init];
-           timeInfo.text = @"5:30-7";
-           timeInfo.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
-           [timeInfo sizeToFit];
-           timeInfo.frame = CGRectMake(15.0, yEdge, timeInfo.bounds.size.width, timeInfo.bounds.size.height);
-           yEdge += timeInfo.frame.size.height + 2*topPadding;
-           [_scrollView addSubview:timeInfo];
            
+           unsigned long totalTimes = [json[@"times"] count];
            
-           // Time Label
-           UILabel *instructorLabel = [[UILabel alloc] init];
-           instructorLabel.text = @"Instructor";
-           instructorLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
-           [instructorLabel sizeToFit];
-           instructorLabel.frame = CGRectMake(15.0, yEdge, instructorLabel.bounds.size.width, timeLabel.bounds.size.height);
-           yEdge += instructorLabel.frame.size.height;
-           [_scrollView addSubview:instructorLabel];
-           
-//           yEdge += 20;
-           _tableView  = [[UITableView alloc] init];
-           _tableView.dataSource = self;
-           _tableView.delegate = self;
-           _tableView.showsVerticalScrollIndicator = NO;
-           _tableView.alwaysBounceVertical = NO;
-           _tableView.frame = CGRectMake(0, yEdge, self.view.frame.size.width, cellHeight);
-           [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
-           [_scrollView addSubview:_tableView];
+           for (unsigned long i=0; i<totalTimes; i++) {
+             UILabel *timeInfo = [[UILabel alloc] init];
+             NSMutableString *daysText = [NSMutableString stringWithCapacity:100];
+             
+             NSNumber *num = [NSNumber numberWithInt:1];
+             NSArray *days = [json[@"times"][i] allKeysForObject:num];
+             NSLog(@"%@", days);
+             int counter = 0;
+             for (NSString *day in days) {
+               if (counter != 0) {
+                 [daysText appendString:@", "];
+               }
+               [daysText appendString:[Util intoLowerCaseExceptForFirstLetter:day]];
+               counter++;
+             }
+             
+             NSString *startTime = json[@"times"][i][@"time"];
+             NSString *endTime = json[@"times"][i][@"endTime"];
+             
+             timeInfo.text = [NSString stringWithFormat:@"%@: %@—%@", daysText, startTime, endTime];
+             timeInfo.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+             [timeInfo sizeToFit];
+             timeInfo.frame = CGRectMake(15.0, yEdge, timeInfo.bounds.size.width, timeInfo.bounds.size.height);
+             yEdge += timeInfo.frame.size.height;
+             [_scrollView addSubview:timeInfo];
 
-
+           }
+           
+           yEdge += 2*topPadding;
+           
+           
+           if ([self showInstructor]) {
+             // Instructor Label
+             UILabel *instructorLabel = [[UILabel alloc] init];
+             instructorLabel.text = @"Instructor";
+             instructorLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+             [instructorLabel sizeToFit];
+             instructorLabel.frame = CGRectMake(15.0, yEdge, instructorLabel.bounds.size.width, timeLabel.bounds.size.height);
+             yEdge += instructorLabel.frame.size.height;
+             [_scrollView addSubview:instructorLabel];
+             
+             //           yEdge += 20;
+             _tableView  = [[UITableView alloc] init];
+             _tableView.dataSource = self;
+             _tableView.delegate = self;
+             _tableView.showsVerticalScrollIndicator = NO;
+             _tableView.alwaysBounceVertical = NO;
+             _tableView.frame = CGRectMake(0, yEdge, self.view.frame.size.width, cellHeight);
+             [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
+             [_scrollView addSubview:_tableView];
+           }
            
            _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, yEdge + [self.navigationController navigationBar].frame.size.height + 40);
 

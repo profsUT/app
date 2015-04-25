@@ -1,4 +1,5 @@
 #import "ProfCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 static CGFloat leftPadding = 15.0;
 
@@ -27,7 +28,7 @@ static CGFloat leftPadding = 15.0;
 - (instancetype)initWithFirstName:(NSString *)first
                          lastName:(NSString *)last
                           courses:(NSDictionary *)courses
-                            image:(UIImage *)image {
+                            imageURL:(NSString *)imageURL {
   self = [super init];
   if (self) {
     self.nameLabel = [[UILabel alloc] init];
@@ -35,7 +36,7 @@ static CGFloat leftPadding = 15.0;
     self.nameLabel.text = [NSString stringWithFormat:@"%@, %@", last, first];
     [self.nameLabel sizeToFit];
     self.nameLabel.frame = CGRectMake(100, 50 - self.nameLabel.frame.size.height,
-                                      self.frame.size.width - 100, self.nameLabel.frame.size.height+20);
+                                      self.frame.size.width - 130, self.nameLabel.frame.size.height+20);
     self.nameLabel.numberOfLines = 0;
 //    self.nameLabel.layer.borderColor = [[UIColor redColor] CGColor];
 //    self.nameLabel.layer.borderWidth = 2.0;
@@ -68,15 +69,40 @@ static CGFloat leftPadding = 15.0;
 
     self.courseLabel.text = courseString;
     
-    self.courseLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.courseLabel.numberOfLines = 0;
+//    self.courseLabel.lineBreakMode = NSLineBreakByWordWrapping;
+//    self.courseLabel.numberOfLines = 0;
     [self.courseLabel sizeToFit];
     self.courseLabel.frame = CGRectMake(100, 50,
-                                        self.frame.size.width - 100, self.courseLabel.frame.size.height * 2);
+                                        self.frame.size.width - 130, self.courseLabel.frame.size.height * 2);
     
-    self.portraitView = [[UIImageView alloc] initWithImage:image];
-    self.portraitView.frame = CGRectMake(self.imageView.frame.origin.x + 10,
-                                         self.imageView.frame.origin.y + 10, 80, 80);
+////    Functional code
+//    self.portraitView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"quigley.png"]];
+//    self.portraitView.frame = CGRectMake(self.imageView.frame.origin.x + 10,
+//                                         self.imageView.frame.origin.y + 10, 80, 80);
+
+//    NSLog(@"%@", imageURL);
+    
+    if([imageURL isEqual:@""]) {
+      self.portraitView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"profCell.png"]];
+      self.portraitView.frame = CGRectMake(self.imageView.frame.origin.x + 10,
+                                           self.imageView.frame.origin.y + 10, 80, 80);
+    }
+    else {
+      [self.imageView
+       sd_setImageWithURL:[NSURL URLWithString:imageURL]
+       placeholderImage:[UIImage imageNamed:@"quigley.png"]];
+
+    }
+    
+    
+//    [self.portraitView
+//     sd_setImageWithURL:[NSURL URLWithString:@"http://django-profs-prod.s3.amazonaws.com/media/profile_pics/chyi.jpg"]
+//      placeholderImage:[UIImage imageNamed:@"quigley.png"]];
+    
+//    NSLog(@"imageView frame x: %f, y: %f", self.imageView.frame.origin.x, self.imageView.frame.origin.y);
+//    self.portraitView.frame = CGRectMake(self.imageView.frame.origin.x + 10,
+//                                         self.imageView.frame.origin.y + 10, 80, 80);
+
 
     [self.contentView addSubview:self.nameLabel];
     [self.contentView addSubview:self.courseLabel];
