@@ -29,7 +29,7 @@
   
   //set the tab bar title appearance for normal state
   [[UITabBarItem appearance]
-   setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
+   setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor shadedGrayColor],
                             NSFontAttributeName:[UIFont fontWithName:@"Copse" size:14.0f]}
    forState:UIControlStateNormal];
   
@@ -37,7 +37,7 @@
   [[UITabBarItem appearance]
    setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
                              NSFontAttributeName:[UIFont fontWithName:@"Copse" size:14.0f]}
-   forState:UIControlStateHighlighted];
+   forState:UIControlStateSelected];
 }
 
 - (void)didReceiveMemoryWarning {
