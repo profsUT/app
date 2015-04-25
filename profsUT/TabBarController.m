@@ -21,6 +21,7 @@
   [super viewDidLoad];
   self.navigationItem.title = @"profsUT";
   CGRect frame = CGRectMake(0.0, -1.0, self.view.bounds.size.width, 50);
+  self.tabBar.tintColor = [UIColor whiteColor];
   UIView *v = [[UIView alloc] initWithFrame:frame];
   [v setBackgroundColor:[UIColor burntOrangeColor]];
   [v setAlpha:1];

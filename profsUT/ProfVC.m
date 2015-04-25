@@ -166,7 +166,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   // Rotate
   NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
   [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-  NSLog(@"Play pressed");
+//  NSLog(@"Play pressed");
 }
 
 
@@ -179,7 +179,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   
   _moviePlayer.controlStyle = MPMovieControlStyleNone;
   
-  NSLog(@"Movie playback did finish");
+//  NSLog(@"Movie playback did finish");
   if ([player
        respondsToSelector:@selector(setFullscreen:animated:)])
   {
@@ -188,10 +188,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 }
 
 -(void) doneButtonPressed:(NSNotification *)notification {
-//  MoviePlayerController *player = [notification object];
-//  NSNumber *reason = [notification.userInfo objectForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey];
-  
-  NSLog(@"Done pressed");
+//  NSLog(@"Done pressed");
   _moviePlayer.controlStyle = MPMovieControlStyleNone;
 
 }
