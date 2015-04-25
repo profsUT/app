@@ -29,7 +29,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
     // Set title for the tab
     self.title = @"Courses";
     // Set the image icon for the tab
-    UIImage *tabImage = [UIImage imageNamed:@"courseIcon.png"];
+    UIImage *tabImage = [UIImage imageNamed:@"courseIcon2.png"];
     UIImage *scaledImage = [Util imageWithImage:tabImage scaledToSize:CGSizeMake(25,25)];
     self.tabBarItem.image = scaledImage;
   }

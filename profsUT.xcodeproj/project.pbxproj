@@ -15,6 +15,9 @@
 		1115A6F21ADE3E9700AA3A59 /* CourseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1115A6F11ADE3E9600AA3A59 /* CourseVC.m */; };
 		1115A6F41ADE48ED00AA3A59 /* courseIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1115A6F31ADE48ED00AA3A59 /* courseIcon.png */; };
 		1118DF031AEB2555001E54D7 /* profCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 1118DF021AEB2555001E54D7 /* profCell.png */; };
+		1118DF051AEB2A4E001E54D7 /* courseIcon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1118DF041AEB2A4E001E54D7 /* courseIcon2.png */; };
+		1118DF071AEB2B12001E54D7 /* profIcon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1118DF061AEB2B12001E54D7 /* profIcon2.png */; };
+		1118DF0A1AEB2D9F001E54D7 /* MoviePlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118DF091AEB2D9F001E54D7 /* MoviePlayerController.m */; };
 		CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF341AAED392006D08EB /* FeedVC.m */; };
 		CD1FFF491AAED392006D08EB /* Professor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF391AAED392006D08EB /* Professor.m */; };
 		CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */ = {isa = PBXBuildFile; fileRef = CD1FFF3C1AAED392006D08EB /* sample.mov */; };
@@ -59,6 +62,10 @@
 		1115A6F11ADE3E9600AA3A59 /* CourseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseVC.m; sourceTree = "<group>"; };
 		1115A6F31ADE48ED00AA3A59 /* courseIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = courseIcon.png; sourceTree = "<group>"; };
 		1118DF021AEB2555001E54D7 /* profCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profCell.png; sourceTree = "<group>"; };
+		1118DF041AEB2A4E001E54D7 /* courseIcon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = courseIcon2.png; sourceTree = "<group>"; };
+		1118DF061AEB2B12001E54D7 /* profIcon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profIcon2.png; sourceTree = "<group>"; };
+		1118DF081AEB2D9F001E54D7 /* MoviePlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePlayerController.h; sourceTree = "<group>"; };
+		1118DF091AEB2D9F001E54D7 /* MoviePlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePlayerController.m; sourceTree = "<group>"; };
 		11ED4E1F472339D1532BB583 /* Pods-profsUT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-profsUT.release.xcconfig"; path = "Pods/Target Support Files/Pods-profsUT/Pods-profsUT.release.xcconfig"; sourceTree = "<group>"; };
 		CD1FFF331AAED392006D08EB /* FeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedVC.h; sourceTree = "<group>"; };
 		CD1FFF341AAED392006D08EB /* FeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedVC.m; sourceTree = "<group>"; };
@@ -129,7 +136,9 @@
 			isa = PBXGroup;
 			children = (
 				1115A6F31ADE48ED00AA3A59 /* courseIcon.png */,
+				1118DF041AEB2A4E001E54D7 /* courseIcon2.png */,
 				1118DF021AEB2555001E54D7 /* profCell.png */,
+				1118DF061AEB2B12001E54D7 /* profIcon2.png */,
 				1115A6EE1ADE368E00AA3A59 /* profIcon.png */,
 				CD1FFF3C1AAED392006D08EB /* sample.mov */,
 				CD9E129A1AC278A6004363A6 /* quigley.png */,
@@ -180,6 +189,8 @@
 				1115A6F11ADE3E9600AA3A59 /* CourseVC.m */,
 				CD251C6A1AA25AFF0062E2BC /* ProfVC.h */,
 				CD251C6B1AA25AFF0062E2BC /* ProfVC.m */,
+				1118DF081AEB2D9F001E54D7 /* MoviePlayerController.h */,
+				1118DF091AEB2D9F001E54D7 /* MoviePlayerController.m */,
 				CD1FFF381AAED392006D08EB /* Professor.h */,
 				CD1FFF391AAED392006D08EB /* Professor.m */,
 				1115A6E51ADE10B800AA3A59 /* Course.h */,
@@ -318,6 +329,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD80741E1AA25423007E334A /* Images.xcassets in Resources */,
+				1118DF051AEB2A4E001E54D7 /* courseIcon2.png in Resources */,
+				1118DF071AEB2B12001E54D7 /* profIcon2.png in Resources */,
 				CD9E129B1AC278A6004363A6 /* quigley.png in Resources */,
 				1118DF031AEB2555001E54D7 /* profCell.png in Resources */,
 				CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */,
@@ -382,6 +395,7 @@
 				1115A6ED1ADE2A3500AA3A59 /* TabBarController.m in Sources */,
 				CD251C7A1AA261170062E2BC /* UIColor+profsUT.m in Sources */,
 				1115A6E71ADE10B800AA3A59 /* Course.m in Sources */,
+				1118DF0A1AEB2D9F001E54D7 /* MoviePlayerController.m in Sources */,
 				CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */,
 				CD9E129E1AC27E96004363A6 /* ProfCell.m in Sources */,
 				CD8074131AA25423007E334A /* main.m in Sources */,
