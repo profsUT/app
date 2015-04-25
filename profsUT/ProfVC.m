@@ -9,6 +9,8 @@
 #import "Util.h"
 #import "CourseCell.h"
 
+#import <SDWebImage/UIImageView+WebCache.h>
+
 @import MediaPlayer;
 
 static CGFloat leftPadding = 15.0;
@@ -177,7 +179,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
    name:MPMoviePlayerPlaybackDidFinishNotification
    object:player];
   
-  _moviePlayer.controlStyle = MPMovieControlStyleNone;
+//  _moviePlayer.controlStyle = MPMovieControlStyleNone;
   
 //  NSLog(@"Movie playback did finish");
   if ([player
@@ -264,6 +266,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
                  // If at least one video for this professor exists
                  if ([_prof[@"video"] count] > 0) {
                    NSString *videoURL = _prof[@"video"][0][@"video_url"];
+
                    [self playVideoFromURL:videoURL];
 
                  } else {

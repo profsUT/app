@@ -87,7 +87,6 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSString *profPicURL;
   
   if ([prof[@"profile_photo"] isEqual:[NSNull null]]) {
-    NSLog(@"Photo does not exist");
     // send placeholder
     profPicURL =@"";
   }
