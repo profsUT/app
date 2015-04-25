@@ -138,7 +138,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   
   _moviePlayer.view.frame = CGRectMake(leftPadding, yEdge,
                                   self.view.bounds.size.width - 30.0, 200);
-  _moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
+  _moviePlayer.controlStyle = MPMovieControlStyleNone;
   [_scrollView addSubview:_moviePlayer.view];
 
   
@@ -189,7 +189,9 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 
 -(void) doneButtonPressed:(NSNotification *)notification {
 //  NSLog(@"Done pressed");
+  MoviePlayerController *player = [notification object];
   _moviePlayer.controlStyle = MPMovieControlStyleNone;
+  player.controlStyle = MPMovieControlStyleNone;
 
 }
 
