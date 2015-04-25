@@ -14,6 +14,7 @@
 		1115A6EF1ADE368E00AA3A59 /* profIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1115A6EE1ADE368E00AA3A59 /* profIcon.png */; };
 		1115A6F21ADE3E9700AA3A59 /* CourseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1115A6F11ADE3E9600AA3A59 /* CourseVC.m */; };
 		1115A6F41ADE48ED00AA3A59 /* courseIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1115A6F31ADE48ED00AA3A59 /* courseIcon.png */; };
+		1118DF031AEB2555001E54D7 /* profCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 1118DF021AEB2555001E54D7 /* profCell.png */; };
 		CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF341AAED392006D08EB /* FeedVC.m */; };
 		CD1FFF491AAED392006D08EB /* Professor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF391AAED392006D08EB /* Professor.m */; };
 		CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */ = {isa = PBXBuildFile; fileRef = CD1FFF3C1AAED392006D08EB /* sample.mov */; };
@@ -57,6 +58,7 @@
 		1115A6F01ADE3E9600AA3A59 /* CourseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseVC.h; sourceTree = "<group>"; };
 		1115A6F11ADE3E9600AA3A59 /* CourseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseVC.m; sourceTree = "<group>"; };
 		1115A6F31ADE48ED00AA3A59 /* courseIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = courseIcon.png; sourceTree = "<group>"; };
+		1118DF021AEB2555001E54D7 /* profCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profCell.png; sourceTree = "<group>"; };
 		11ED4E1F472339D1532BB583 /* Pods-profsUT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-profsUT.release.xcconfig"; path = "Pods/Target Support Files/Pods-profsUT/Pods-profsUT.release.xcconfig"; sourceTree = "<group>"; };
 		CD1FFF331AAED392006D08EB /* FeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedVC.h; sourceTree = "<group>"; };
 		CD1FFF341AAED392006D08EB /* FeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedVC.m; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				1115A6F31ADE48ED00AA3A59 /* courseIcon.png */,
+				1118DF021AEB2555001E54D7 /* profCell.png */,
 				1115A6EE1ADE368E00AA3A59 /* profIcon.png */,
 				CD1FFF3C1AAED392006D08EB /* sample.mov */,
 				CD9E129A1AC278A6004363A6 /* quigley.png */,
@@ -316,6 +319,7 @@
 			files = (
 				CD80741E1AA25423007E334A /* Images.xcassets in Resources */,
 				CD9E129B1AC278A6004363A6 /* quigley.png in Resources */,
+				1118DF031AEB2555001E54D7 /* profCell.png in Resources */,
 				CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */,
 				CD251C841AA26C5F0062E2BC /* settings.png in Resources */,
 				CD251C7D1AA2675C0062E2BC /* Copse.ttf in Resources */,

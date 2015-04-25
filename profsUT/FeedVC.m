@@ -52,7 +52,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   _tableView.showsVerticalScrollIndicator = NO;
   _tableView.contentInset = UIEdgeInsetsMake(0,
                                              0,
-                                             self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height,
+                                             self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height + self.tabBarController.tabBar.frame.size.height*2-5,
                                              0);
   [_tableView registerClass:[ProfCell class] forCellReuseIdentifier:kCellIdentifier];
   [self.view addSubview:_tableView];

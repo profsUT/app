@@ -35,7 +35,7 @@ static CGFloat leftPadding = 15.0;
     self.nameLabel.font = [UIFont fontWithName:@"Copse" size:20.0];
     self.nameLabel.text = [NSString stringWithFormat:@"%@, %@", last, first];
     [self.nameLabel sizeToFit];
-    self.nameLabel.frame = CGRectMake(100, 50 - self.nameLabel.frame.size.height,
+    self.nameLabel.frame = CGRectMake(110, 50 - self.nameLabel.frame.size.height,
                                       self.frame.size.width - 130, self.nameLabel.frame.size.height+20);
     self.nameLabel.numberOfLines = 0;
 //    self.nameLabel.layer.borderColor = [[UIColor redColor] CGColor];
@@ -72,7 +72,7 @@ static CGFloat leftPadding = 15.0;
 //    self.courseLabel.lineBreakMode = NSLineBreakByWordWrapping;
 //    self.courseLabel.numberOfLines = 0;
     [self.courseLabel sizeToFit];
-    self.courseLabel.frame = CGRectMake(100, 50,
+    self.courseLabel.frame = CGRectMake(110, 50,
                                         self.frame.size.width - 130, self.courseLabel.frame.size.height * 2);
     
 ////    Functional code
@@ -84,13 +84,13 @@ static CGFloat leftPadding = 15.0;
     
     if([imageURL isEqual:@""]) {
       self.portraitView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"profCell.png"]];
-      self.portraitView.frame = CGRectMake(self.imageView.frame.origin.x + 10,
-                                           self.imageView.frame.origin.y + 10, 80, 80);
+      self.portraitView.frame = CGRectMake(0, 0, 100, 100);
     }
     else {
-      [self.imageView
-       sd_setImageWithURL:[NSURL URLWithString:imageURL]
-       placeholderImage:[UIImage imageNamed:@"quigley.png"]];
+      self.portraitView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"quigley.png"]];
+      [self.portraitView
+       sd_setImageWithURL:[NSURL URLWithString:imageURL]];
+      self.portraitView.frame = CGRectMake(0, 0, 100, 100);
 
     }
     
