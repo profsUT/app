@@ -121,35 +121,79 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   
   NSURL *URL = [NSURL URLWithString:streamURL];
 
-  _moviePlayer = [[MPMoviePlayerController alloc]
+  _moviePlayer = [[MoviePlayerController alloc]
                   initWithContentURL:URL];
+  
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(moviePlayBackDidFinish:)
                                                name:MPMoviePlayerPlaybackDidFinishNotification
                                              object:_moviePlayer];
   
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(doneButtonPressed:)
+                                               name:MPMoviePlayerDidExitFullscreenNotification
+                                             object:_moviePlayer];
+  
+  
   _moviePlayer.view.frame = CGRectMake(leftPadding, yEdge,
                                   self.view.bounds.size.width - 30.0, 200);
-  _moviePlayer.controlStyle = MPMovieControlStyleDefault;
-  _moviePlayer.shouldAutoplay = NO;
+  _moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
   [_scrollView addSubview:_moviePlayer.view];
-  [_moviePlayer setFullscreen:NO animated:YES];
+
+  
+  UIImage *playBtnImage = [UIImage imageNamed:@"playButton.png"];
+  
+  UIButton *playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+  [playButton setImage:playBtnImage forState:UIControlStateNormal];
+  [playButton addTarget:self
+                 action:@selector(playButtonPressed:)
+       forControlEvents:UIControlEventTouchUpInside];
+  playButton.frame = CGRectMake(leftPadding, yEdge,
+                                self.view.bounds.size.width - 30.0, 200);
+  [_scrollView addSubview:playButton];
+
   yEdge += _moviePlayer.view.frame.size.height + sectionBreak;
 }
 
+#pragma mark - button handling
+-(void)playButtonPressed : (id)sender
+{
+  _moviePlayer.shouldAutoplay = YES;
+  [_moviePlayer setFullscreen:YES animated:YES];
+  _moviePlayer.controlStyle = MPMovieControlStyleDefault;
+  
+  // Rotate
+  NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+  [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+  NSLog(@"Play pressed");
+}
+
+
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
-  MPMoviePlayerController *player = [notification object];
+  MoviePlayerController *player = [notification object];
   [[NSNotificationCenter defaultCenter]
    removeObserver:self
    name:MPMoviePlayerPlaybackDidFinishNotification
    object:player];
   
+  _moviePlayer.controlStyle = MPMovieControlStyleNone;
+  
+  NSLog(@"Movie playback did finish");
   if ([player
        respondsToSelector:@selector(setFullscreen:animated:)])
   {
 //    [player.view removeFromSuperview];
   }
+}
+
+-(void) doneButtonPressed:(NSNotification *)notification {
+//  MoviePlayerController *player = [notification object];
+//  NSNumber *reason = [notification.userInfo objectForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey];
+  
+  NSLog(@"Done pressed");
+  _moviePlayer.controlStyle = MPMovieControlStyleNone;
+
 }
 
 - (void)viewDidLoad {
@@ -223,7 +267,32 @@ static NSString *kCellIdentifier = @"Cell Identifier";
                    NSString *videoURL = _prof[@"video"][0][@"video_url"];
                    [self playVideoFromURL:videoURL];
 
+                 } else {
+                   yEdge += topPadding;
                  }
+                 
+                 
+                 if ([_prof[@"average_rating"] isEqual:[NSNull null]] != 1) {
+                   // Ratings Label
+                   UILabel *ratingsLabel = [[UILabel alloc] init];
+                   ratingsLabel.text = @"Instructor Rating";
+                   ratingsLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+                   [ratingsLabel sizeToFit];
+                   ratingsLabel.frame = CGRectMake(15.0, yEdge, ratingsLabel.bounds.size.width, ratingsLabel.bounds.size.height);
+                   yEdge += ratingsLabel.frame.size.height;
+                   [_scrollView addSubview:ratingsLabel];
+                   
+                   UILabel *ratingInfo = [[UILabel alloc] init];
+                   ratingInfo.text = [NSString stringWithFormat:@"%.2f/5", [_prof[@"average_rating"] floatValue]];
+                   ratingInfo.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+                   [ratingInfo sizeToFit];
+                   ratingInfo.frame = CGRectMake(15.0, yEdge, ratingInfo.bounds.size.width, ratingInfo.bounds.size.height);
+                   yEdge += ratingInfo.frame.size.height + 2*topPadding;
+                   [_scrollView addSubview:ratingInfo];
+
+
+                 }
+
               
                  
                  UILabel *courseLabel = [[UILabel alloc] init];

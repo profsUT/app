@@ -18,6 +18,7 @@
 		1118DF051AEB2A4E001E54D7 /* courseIcon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1118DF041AEB2A4E001E54D7 /* courseIcon2.png */; };
 		1118DF071AEB2B12001E54D7 /* profIcon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1118DF061AEB2B12001E54D7 /* profIcon2.png */; };
 		1118DF0A1AEB2D9F001E54D7 /* MoviePlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118DF091AEB2D9F001E54D7 /* MoviePlayerController.m */; };
+		1118DF0C1AEC086A001E54D7 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1118DF0B1AEC086A001E54D7 /* playButton.png */; };
 		CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF341AAED392006D08EB /* FeedVC.m */; };
 		CD1FFF491AAED392006D08EB /* Professor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF391AAED392006D08EB /* Professor.m */; };
 		CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */ = {isa = PBXBuildFile; fileRef = CD1FFF3C1AAED392006D08EB /* sample.mov */; };
@@ -66,6 +67,7 @@
 		1118DF061AEB2B12001E54D7 /* profIcon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profIcon2.png; sourceTree = "<group>"; };
 		1118DF081AEB2D9F001E54D7 /* MoviePlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePlayerController.h; sourceTree = "<group>"; };
 		1118DF091AEB2D9F001E54D7 /* MoviePlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePlayerController.m; sourceTree = "<group>"; };
+		1118DF0B1AEC086A001E54D7 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 		11ED4E1F472339D1532BB583 /* Pods-profsUT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-profsUT.release.xcconfig"; path = "Pods/Target Support Files/Pods-profsUT/Pods-profsUT.release.xcconfig"; sourceTree = "<group>"; };
 		CD1FFF331AAED392006D08EB /* FeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedVC.h; sourceTree = "<group>"; };
 		CD1FFF341AAED392006D08EB /* FeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedVC.m; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		CD251C7B1AA2631B0062E2BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1118DF0B1AEC086A001E54D7 /* playButton.png */,
 				1115A6F31ADE48ED00AA3A59 /* courseIcon.png */,
 				1118DF041AEB2A4E001E54D7 /* courseIcon2.png */,
 				1118DF021AEB2555001E54D7 /* profCell.png */,
@@ -328,6 +331,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1118DF0C1AEC086A001E54D7 /* playButton.png in Resources */,
 				CD80741E1AA25423007E334A /* Images.xcassets in Resources */,
 				1118DF051AEB2A4E001E54D7 /* courseIcon2.png in Resources */,
 				1118DF071AEB2B12001E54D7 /* profIcon2.png in Resources */,

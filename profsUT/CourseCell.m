@@ -72,14 +72,14 @@ static CGFloat topPadding = 30.0;
     self.courseIDLabel.text = _courseID;
     [self.courseIDLabel sizeToFit];
     self.courseIDLabel.frame = CGRectMake(leftPadding+2, topPadding,
-                                          self.frame.size.width - 100, self.courseIDLabel.frame.size.height * 2);
+                                          self.frame.size.width - 50, self.courseIDLabel.frame.size.height * 2);
     
     
     self.profNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
     self.profNameLabel.text = [NSString stringWithFormat:@"%@, %@", _profLastName, _profFirstName];
     [self.profNameLabel sizeToFit];
     self.profNameLabel.frame = CGRectMake(leftPadding+2, topPadding+topPadding/2,
-                                          self.frame.size.width - 200, self.profNameLabel.frame.size.height * 2);
+                                          self.frame.size.width - 50, self.profNameLabel.frame.size.height * 2);
     
 //    self.profNameLabel.layer.borderColor = [[UIColor greenColor] CGColor];
 //    self.profNameLabel.layer.borderWidth = 2.0;

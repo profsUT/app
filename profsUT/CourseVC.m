@@ -202,14 +202,14 @@ static NSString *kCellIdentifier = @"Cell Identifier";
            yEdge += courseIDLabel.frame.size.height + 2*topPadding;
            [_scrollView addSubview:courseIDLabel];
            
-           // Ratings Label
-           UILabel *ratingsLabel = [[UILabel alloc] init];
-           ratingsLabel.text = @"Course Ratings";
-           ratingsLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
-           [ratingsLabel sizeToFit];
-           ratingsLabel.frame = CGRectMake(15.0, yEdge, ratingsLabel.bounds.size.width, ratingsLabel.bounds.size.height);
-           yEdge += ratingsLabel.frame.size.height + 2*topPadding;
-           [_scrollView addSubview:ratingsLabel];
+//           // Ratings Label
+//           UILabel *ratingsLabel = [[UILabel alloc] init];
+//           ratingsLabel.text = @"Course Ratings";
+//           ratingsLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+//           [ratingsLabel sizeToFit];
+//           ratingsLabel.frame = CGRectMake(15.0, yEdge, ratingsLabel.bounds.size.width, ratingsLabel.bounds.size.height);
+//           yEdge += ratingsLabel.frame.size.height + 2*topPadding;
+//           [_scrollView addSubview:ratingsLabel];
            
            // Time Label
            UILabel *timeLabel = [[UILabel alloc] init];
