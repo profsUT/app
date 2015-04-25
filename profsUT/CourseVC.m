@@ -169,7 +169,6 @@ static NSString *kCellIdentifier = @"Cell Identifier";
            // update the UI here (and only here to the extent it depends on the json)
            
            self.navigationItem.title = json[@"courseID"];
-           NSLog(@"%@", json);
            
            NSString *firstName = json[@"instructor"][@"first"];
            NSString *lastName = json[@"instructor"][@"last"];
@@ -242,6 +241,14 @@ static NSString *kCellIdentifier = @"Cell Identifier";
              
              NSString *startTime = json[@"times"][i][@"time"];
              NSString *endTime = json[@"times"][i][@"endTime"];
+             
+             // Trim seconds from time
+             if ([startTime length] > 3 && [endTime length] > 3) {
+               startTime = [startTime substringToIndex:[startTime length] - 3];
+               endTime = [endTime substringToIndex:[endTime length] - 3];
+             } else {
+               //no characters to delete... attempting to do so will result in a crash
+             }
              
              timeInfo.text = [NSString stringWithFormat:@"%@: %@—%@", daysText, startTime, endTime];
              timeInfo.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
@@ -316,7 +323,6 @@ static NSString *kCellIdentifier = @"Cell Identifier";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
   
-  NSLog(@"profName is %@", _profName);
   cell = [[ProfCell alloc] initWithFullName:_profName];
   
   return cell;
