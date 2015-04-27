@@ -129,10 +129,10 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSLog(@"Succeeded! Received %lu bytes of data", (unsigned long)[_responseData length]);
   
   // convert to JSON
-  NSError *myError = nil;
-  NSArray *_courseJSON = [NSJSONSerialization JSONObjectWithData:_responseData
-                                                  options:NSJSONReadingMutableLeaves
-                                                    error:&myError];
+//  NSError *myError = nil;
+//  NSArray *_courseJSON = [NSJSONSerialization JSONObjectWithData:_responseData
+//                                                  options:NSJSONReadingMutableLeaves
+//                                                    error:&myError];
 
   [[NSNotificationCenter defaultCenter] postNotificationName:@"NSURLConnectionDidFinish"
                                                       object:nil];
@@ -153,7 +153,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   
   yEdge = sectionBreak;
   CGFloat widthOfScreen  =  [[UIScreen mainScreen] bounds].size.width;
-  CGFloat heightOfScreen = [[UIScreen mainScreen] bounds].size.height;
+//  CGFloat heightOfScreen = [[UIScreen mainScreen] bounds].size.height;
   
   NSURLResponse *requestResponse;
   

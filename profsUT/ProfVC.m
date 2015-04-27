@@ -14,7 +14,7 @@
 @import MediaPlayer;
 
 static CGFloat leftPadding = 15.0;
-static CGFloat rightPadding = 15.0;
+//static CGFloat rightPadding = 15.0;
 static CGFloat topPadding = 10.0;
 static CGFloat sectionBreak = 20.0;
 static CGFloat cellHeight = 50.0;
@@ -112,7 +112,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   NSLog(@"Succeeded! Received %lu bytes of data", (unsigned long)[_responseData length]);
   
   // convert to JSON
-  NSError *myError = nil;
+//  NSError *myError = nil;
 
   [[NSNotificationCenter defaultCenter] postNotificationName:@"NSURLConnectionDidFinish"
                                                       object:nil];
@@ -171,9 +171,9 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   _moviePlayer.controlStyle = MPMovieControlStyleDefault;
   
   // Rotate
-  [[UIDevice currentDevice] setValue:
-   [NSNumber numberWithInteger: UIInterfaceOrientationLandscapeLeft]
-                              forKey:@"orientation"];
+//  [[UIDevice currentDevice] setValue:
+//   [NSNumber numberWithInteger: UIInterfaceOrientationLandscapeLeft]
+//                              forKey:@"orientation"];
 //  NSLog(@"Play pressed");
 }
 
