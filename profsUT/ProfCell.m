@@ -32,7 +32,7 @@ static CGFloat leftPadding = 15.0;
   self = [super init];
   if (self) {
     self.nameLabel = [[UILabel alloc] init];
-    self.nameLabel.font = [UIFont fontWithName:@"Copse" size:20.0];
+    self.nameLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
     self.nameLabel.text = [NSString stringWithFormat:@"%@, %@", last, first];
     [self.nameLabel sizeToFit];
     self.nameLabel.frame = CGRectMake(110, 50 - self.nameLabel.frame.size.height,
@@ -84,13 +84,19 @@ static CGFloat leftPadding = 15.0;
     
     if([imageURL isEqual:@""]) {
       self.portraitView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"profCell.png"]];
-      self.portraitView.frame = CGRectMake(0, 0, 100, 100);
+      self.portraitView.frame = CGRectMake(10, 10, 80, 80);
+      self.portraitView.layer.masksToBounds = YES;
+      self.portraitView.layer.cornerRadius = self.portraitView.frame.size.width / 2.0;
+
     }
     else {
       self.portraitView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"quigley.png"]];
       [self.portraitView
        sd_setImageWithURL:[NSURL URLWithString:imageURL]];
-      self.portraitView.frame = CGRectMake(0, 0, 100, 100);
+      self.portraitView.frame = CGRectMake(10, 10, 80, 80);
+      self.portraitView.layer.masksToBounds = YES;
+      self.portraitView.layer.cornerRadius = self.portraitView.frame.size.width / 2.0;
+
 
     }
     

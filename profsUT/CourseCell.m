@@ -58,7 +58,7 @@ static CGFloat topPadding = 30.0;
     self.courseIDLabel = [[UILabel alloc] init];
     self.profNameLabel = [[UILabel alloc] init];
     
-    self.courseNameLabel.font = [UIFont fontWithName:@"Copse" size:18.0];
+    self.courseNameLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
     self.courseNameLabel.text = _courseName;
     [self.courseNameLabel sizeToFit];
     self.courseNameLabel.frame = CGRectMake(leftPadding, topPadding - self.courseNameLabel.frame.size.height,

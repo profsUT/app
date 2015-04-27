@@ -43,14 +43,14 @@
 //  ClassFeedVC *feedVC = [[ClassFeedVC alloc] init];
 //  UINavigationController *navController =
 //      [[UINavigationController alloc] initWithRootViewController:feedVC];
-  UINavigationController *navController =
-  [[UINavigationController alloc] initWithRootViewController:tabBarController];
+  MainNavigationController *navController =
+  [[MainNavigationController alloc] initWithRootViewController:tabBarController];
   UINavigationBar *navBar = navController.navigationBar;
   navBar.barTintColor = [UIColor burntOrangeColor];
   navBar.tintColor = [UIColor whiteColor];
   navBar.translucent = NO;
   navBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                                 NSFontAttributeName:[UIFont fontWithName:@"Copse" size:kNavFontSize]};
+                                 NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Light" size:kNavFontSize]};
   self.window.rootViewController = navController;
   
   [self.window makeKeyAndVisible];

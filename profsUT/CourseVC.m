@@ -180,7 +180,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
            // Course Name
            UILabel *courseNameLabel = [[UILabel alloc] init];
            courseNameLabel.text =  json[@"courseName"];
-           courseNameLabel.font = [UIFont fontWithName:@"Copse" size:20];
+           courseNameLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
            courseNameLabel.numberOfLines = 0;
            [courseNameLabel sizeToFit];
            
@@ -194,7 +194,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
            // Course ID
            UILabel *courseIDLabel = [[UILabel alloc] init];
            courseIDLabel.text = json[@"courseID"];
-           courseIDLabel.font = [UIFont fontWithName:@"Copse" size:20];
+           courseIDLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
            [courseIDLabel sizeToFit];
            courseIDLabel.frame = CGRectMake(15.0, yEdge, courseIDLabel.bounds.size.width, courseIDLabel.bounds.size.height);
          
@@ -213,7 +213,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
            // Time Label
            UILabel *timeLabel = [[UILabel alloc] init];
            timeLabel.text = @"Time";
-           timeLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+           timeLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
            [timeLabel sizeToFit];
            timeLabel.frame = CGRectMake(15.0, yEdge, timeLabel.bounds.size.width, timeLabel.bounds.size.height);
            yEdge += timeLabel.frame.size.height;
@@ -266,7 +266,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
              // Instructor Label
              UILabel *instructorLabel = [[UILabel alloc] init];
              instructorLabel.text = @"Instructor";
-             instructorLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+             instructorLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
              [instructorLabel sizeToFit];
              instructorLabel.frame = CGRectMake(15.0, yEdge, instructorLabel.bounds.size.width, timeLabel.bounds.size.height);
              yEdge += instructorLabel.frame.size.height;

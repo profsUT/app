@@ -19,6 +19,7 @@
 		1118DF071AEB2B12001E54D7 /* profIcon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1118DF061AEB2B12001E54D7 /* profIcon2.png */; };
 		1118DF0A1AEB2D9F001E54D7 /* MoviePlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118DF091AEB2D9F001E54D7 /* MoviePlayerController.m */; };
 		1118DF0C1AEC086A001E54D7 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1118DF0B1AEC086A001E54D7 /* playButton.png */; };
+		11CB35011AEE8CD40015C185 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CB35001AEE8CD40015C185 /* MainNavigationController.m */; };
 		CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF341AAED392006D08EB /* FeedVC.m */; };
 		CD1FFF491AAED392006D08EB /* Professor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF391AAED392006D08EB /* Professor.m */; };
 		CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */ = {isa = PBXBuildFile; fileRef = CD1FFF3C1AAED392006D08EB /* sample.mov */; };
@@ -68,6 +69,8 @@
 		1118DF081AEB2D9F001E54D7 /* MoviePlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePlayerController.h; sourceTree = "<group>"; };
 		1118DF091AEB2D9F001E54D7 /* MoviePlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePlayerController.m; sourceTree = "<group>"; };
 		1118DF0B1AEC086A001E54D7 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
+		11CB34FF1AEE8CD40015C185 /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
+		11CB35001AEE8CD40015C185 /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
 		11ED4E1F472339D1532BB583 /* Pods-profsUT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-profsUT.release.xcconfig"; path = "Pods/Target Support Files/Pods-profsUT/Pods-profsUT.release.xcconfig"; sourceTree = "<group>"; };
 		CD1FFF331AAED392006D08EB /* FeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedVC.h; sourceTree = "<group>"; };
 		CD1FFF341AAED392006D08EB /* FeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedVC.m; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 				CD251C6B1AA25AFF0062E2BC /* ProfVC.m */,
 				1118DF081AEB2D9F001E54D7 /* MoviePlayerController.h */,
 				1118DF091AEB2D9F001E54D7 /* MoviePlayerController.m */,
+				11CB34FF1AEE8CD40015C185 /* MainNavigationController.h */,
+				11CB35001AEE8CD40015C185 /* MainNavigationController.m */,
 				CD1FFF381AAED392006D08EB /* Professor.h */,
 				CD1FFF391AAED392006D08EB /* Professor.m */,
 				1115A6E51ADE10B800AA3A59 /* Course.h */,
@@ -408,6 +413,7 @@
 				CD251C801AA268640062E2BC /* Constants.m in Sources */,
 				CD1FFF4F1AAED392006D08EB /* Util.m in Sources */,
 				1115A6E41ADE0F3500AA3A59 /* ClassFeedVC.m in Sources */,
+				11CB35011AEE8CD40015C185 /* MainNavigationController.m in Sources */,
 				1115A6F21ADE3E9700AA3A59 /* CourseVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

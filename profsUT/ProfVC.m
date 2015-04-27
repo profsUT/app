@@ -137,6 +137,11 @@ static NSString *kCellIdentifier = @"Cell Identifier";
                                                name:MPMoviePlayerDidExitFullscreenNotification
                                              object:_moviePlayer];
   
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(playButtonPressed:)
+                                               name:MPMoviePlayerPlaybackDidFinishNotification
+                                             object:_moviePlayer];
+  
   
   _moviePlayer.view.frame = CGRectMake(leftPadding, yEdge,
                                   self.view.bounds.size.width - 30.0, 200);
@@ -166,8 +171,9 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   _moviePlayer.controlStyle = MPMovieControlStyleDefault;
   
   // Rotate
-  NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-  [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+  [[UIDevice currentDevice] setValue:
+   [NSNumber numberWithInteger: UIInterfaceOrientationLandscapeLeft]
+                              forKey:@"orientation"];
 //  NSLog(@"Play pressed");
 }
 
@@ -255,7 +261,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 
                  UILabel *nameLabel = [[UILabel alloc] init];
                  nameLabel.text = [Util intoLowerCaseExceptForFirstLetter:[NSString stringWithFormat:@"%@ %@", _first, _last]];
-                 nameLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+                 nameLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:24.0];;
                  [nameLabel sizeToFit];
                  nameLabel.frame = CGRectMake(leftPadding, yEdge,
                                               nameLabel.bounds.size.width, nameLabel.bounds.size.height);
@@ -278,7 +284,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
                    // Ratings Label
                    UILabel *ratingsLabel = [[UILabel alloc] init];
                    ratingsLabel.text = @"Instructor Rating";
-                   ratingsLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+                   ratingsLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:24.0];;
                    [ratingsLabel sizeToFit];
                    ratingsLabel.frame = CGRectMake(15.0, yEdge, ratingsLabel.bounds.size.width, ratingsLabel.bounds.size.height);
                    yEdge += ratingsLabel.frame.size.height;
@@ -286,7 +292,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
                    
                    UILabel *ratingInfo = [[UILabel alloc] init];
                    ratingInfo.text = [NSString stringWithFormat:@"%.2f/5", [_prof[@"average_rating"] floatValue]];
-                   ratingInfo.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+                   ratingInfo.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0];
                    [ratingInfo sizeToFit];
                    ratingInfo.frame = CGRectMake(15.0, yEdge, ratingInfo.bounds.size.width, ratingInfo.bounds.size.height);
                    yEdge += ratingInfo.frame.size.height + 2*topPadding;
@@ -299,7 +305,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
                  
                  UILabel *courseLabel = [[UILabel alloc] init];
                  courseLabel.text = @"Courses";
-                 courseLabel.font = [UIFont fontWithName:@"Copse" size:kH2FontSize];
+                 courseLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:24.0];;
                  [courseLabel sizeToFit];
                  courseLabel.frame = CGRectMake(15.0, yEdge, courseLabel.bounds.size.width, courseLabel.bounds.size.height);
                  [_scrollView addSubview:courseLabel];
@@ -323,7 +329,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
                  // update the UI to indicate error
                  UILabel *errorLabel = [[UILabel alloc] init];
                  errorLabel.text = @"Error: The professor could not be loaded.";
-                 errorLabel.font = [UIFont fontWithName:@"Copse" size:16];
+                 errorLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];;
                  [errorLabel sizeToFit];
                  errorLabel.frame = CGRectMake(15.0, self.view.frame.size.height/2, errorLabel.bounds.size.width, errorLabel.bounds.size.height);
                  
