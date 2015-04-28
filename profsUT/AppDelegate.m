@@ -7,7 +7,7 @@
 #import "UIColor+profsUT.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic, assign) BOOL landscapeOnlyOrientation;
 @end
 
 @implementation AppDelegate
@@ -18,6 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//  self.landscapeOnlyOrientation = NO;
+  
   self.window.backgroundColor = [UIColor whiteColor];
   
   // Tab bar stuff
@@ -50,10 +52,15 @@
   navBar.tintColor = [UIColor whiteColor];
   navBar.translucent = NO;
   navBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                                 NSFontAttributeName:[UIFont fontWithName:@"Copse" size:kNavFontSize]};
+                                 NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Light" size:kNavFontSize]};
   self.window.rootViewController = navController;
   
   [self.window makeKeyAndVisible];
+  
+
+  
+//  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
+//  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
   return YES;
 }
 
@@ -62,6 +69,21 @@
   
   return UIInterfaceOrientationMaskPortrait;
 }
+//
+//-(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+//  if (self.landscapeOnlyOrientation) {
+//    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+//  }
+//  return UIInterfaceOrientationMaskPortrait;
+//}
+//
+//- (void)moviePlayerWillEnterFullscreenNotification:(NSNotification*)notification {
+//  self.landscapeOnlyOrientation = YES;
+//}
+//
+//- (void)moviePlayerWillExitFullscreenNotification:(NSNotification*)notification {
+//  self.landscapeOnlyOrientation = NO;
+//}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

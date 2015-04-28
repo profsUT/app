@@ -4,6 +4,7 @@
 #import "FeedVC.h"
 #import "ClassFeedVC.h"
 #import "ProfVC.h"
+#import "MainNavigationController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

@@ -70,14 +70,14 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 //  NSDictionary *course = _course.coursesArray[indexPath.item];
   
   NSDictionary *course = _course.coursesArray[indexPath.item];
-  NSString *courseID = course[@"courseID"];
-  NSString *courseName = course[@"courseName"];
+//  NSString *courseID = course[@"courseID"];
+//  NSString *courseName = course[@"courseName"];
   NSString *courseKey = course[@"id"];
   NSLog(@"%@", courseKey);
   
-  NSString *profFirst = [[course valueForKey:@"instructor"] valueForKey:@"first"];
-  NSString *profLast = [[course valueForKey:@"instructor"] valueForKey:@"last"];
-  NSString *profName = [NSString stringWithFormat:@"%@, %@", profLast, profFirst];
+//  NSString *profFirst = [[course valueForKey:@"instructor"] valueForKey:@"first"];
+//  NSString *profLast = [[course valueForKey:@"instructor"] valueForKey:@"last"];
+//  NSString *profName = [NSString stringWithFormat:@"%@, %@", profLast, profFirst];
 
 //  CourseVC *courseVC = [[CourseVC alloc] initWithCourseID:(NSString *)courseID
 //                                               courseName:(NSString *)courseName
