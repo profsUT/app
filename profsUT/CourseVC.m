@@ -261,6 +261,57 @@ static NSString *kCellIdentifier = @"Cell Identifier";
            
            yEdge += 2*topPadding;
            
+           // Instructor provided description
+           // Description Label
+           if ([json[@"inst_provided_description"] isEqual:[NSNull null]] != 1) {
+             UILabel *descriptionLabel = [[UILabel alloc] init];
+             descriptionLabel.text = @"Course Description";
+             descriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
+             [descriptionLabel sizeToFit];
+             descriptionLabel.frame = CGRectMake(15.0, yEdge, descriptionLabel.bounds.size.width, descriptionLabel.bounds.size.height);
+             yEdge += descriptionLabel.frame.size.height;
+             [_scrollView addSubview:descriptionLabel];
+             
+             UILabel *description = [[UILabel alloc] init];
+             description.text = json[@"inst_provided_description"];
+             description.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+             description.numberOfLines = 0;
+             [description sizeToFit];
+             
+             labelSize = [description.text sizeWithFont:description.font constrainedToSize:CGSizeMake(300, 300000) lineBreakMode:NSLineBreakByWordWrapping];
+             h = labelSize.height;
+             description.frame = CGRectMake(15.0, yEdge, widthOfScreen-25, h);
+             [_scrollView addSubview:description];
+             yEdge += h;
+             yEdge += 2*topPadding;
+             
+           }
+           
+           
+           // Syllabus Label
+           UILabel *syllabusLabel = [[UILabel alloc] init];
+           syllabusLabel.text = @"Syllabus";
+           syllabusLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
+           [syllabusLabel sizeToFit];
+           syllabusLabel.frame = CGRectMake(15.0, yEdge, syllabusLabel.bounds.size.width, syllabusLabel.bounds.size.height);
+           yEdge += syllabusLabel.frame.size.height+10.0;
+           [_scrollView addSubview:syllabusLabel];
+           
+           
+           NSString *syllabusURL = @"https://django-profs-prod.s3.amazonaws.com/media/syllabi/flyer.pdf";
+           UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(15.0, yEdge, widthOfScreen-25, 400)];
+           
+           NSURL *sURL = [NSURL URLWithString:syllabusURL];
+           NSURLRequest *request = [NSURLRequest requestWithURL:sURL];
+           [webView loadRequest:request];
+           
+           [_scrollView addSubview:webView];
+           
+           yEdge += webView.frame.size.height;
+           
+           
+           yEdge += 2*topPadding;
+           
            
            if ([self showInstructor]) {
              // Instructor Label
