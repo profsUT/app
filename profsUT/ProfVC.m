@@ -139,7 +139,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(playButtonPressed:)
-                                               name:MPMoviePlayerPlaybackDidFinishNotification
+                                               name:MPMoviePlayerDidEnterFullscreenNotification
                                              object:_moviePlayer];
   
   
