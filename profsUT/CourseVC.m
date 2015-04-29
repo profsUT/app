@@ -19,6 +19,7 @@ static NSString *kCellIdentifier = @"Cell Identifier";
 
   UIScrollView *_scrollView;
   UITableView *_tableView;
+  UIWebView *_syllabusView;
   NSInteger _index;
   NSDictionary *_prof;
 
@@ -299,15 +300,21 @@ static NSString *kCellIdentifier = @"Cell Identifier";
            
            
            NSString *syllabusURL = @"https://django-profs-prod.s3.amazonaws.com/media/syllabi/flyer.pdf";
-           UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(15.0, yEdge, widthOfScreen-25, 400)];
+           _syllabusView = [[UIWebView alloc] initWithFrame:CGRectMake(15.0, yEdge, widthOfScreen-25, 400)];
            
            NSURL *sURL = [NSURL URLWithString:syllabusURL];
            NSURLRequest *request = [NSURLRequest requestWithURL:sURL];
-           [webView loadRequest:request];
+           [_syllabusView loadRequest:request];
            
-           [_scrollView addSubview:webView];
+           [_scrollView addSubview:_syllabusView];
            
-           yEdge += webView.frame.size.height;
+           yEdge += _syllabusView.frame.size.height;
+           
+//           UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+//           tapGesture.numberOfTapsRequired = 1;
+//           tapGesture.cancelsTouchesInView = NO;
+//           _syllabusView.userInteractionEnabled = YES;
+//           [_syllabusView addGestureRecognizer:tapGesture];
            
            
            yEdge += 2*topPadding;
@@ -344,6 +351,13 @@ static NSString *kCellIdentifier = @"Cell Identifier";
        }];
 
 }
+
+
+//-(void)handleTemplateTap:(UIGestureRecognizer *)sender
+//{
+//  _syllabusView.frame=CGRectMake(0,0,300,300);
+//}
+
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

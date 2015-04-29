@@ -29,7 +29,7 @@ static CGFloat topPadding = 30.0;
     self.courseIDLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
     self.courseIDLabel.text = _courseID;
     [self.courseIDLabel sizeToFit];
-    self.courseIDLabel.frame = CGRectMake(leftPadding+2, topPadding,
+    self.courseIDLabel.frame = CGRectMake(leftPadding, topPadding,
                                           self.frame.size.width - 100, self.courseIDLabel.frame.size.height * 2);
     
     [self.contentView addSubview:self.courseNameLabel];

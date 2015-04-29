@@ -11,5 +11,6 @@
                       courseName:(NSString *)courseName
                        courseKey:(NSString *)courseKey
                         profName:(NSString *)profName;
+//-(void)handleTemplateTap:(UIGestureRecognizer *)sender;
 
 @end
