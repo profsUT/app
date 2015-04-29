@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//  self.landscapeOnlyOrientation = NO;
+//  self.landscapeOnlyOrientation = YES;
   
   self.window.backgroundColor = [UIColor whiteColor];
   
@@ -59,31 +59,31 @@
   
 
   
-//  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
-//  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
   return YES;
 }
 
--(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
-{
-  
-  return UIInterfaceOrientationMaskPortrait;
-}
-//
-//-(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-//  if (self.landscapeOnlyOrientation) {
-//    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
-//  }
+//-(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+//{
+//  
 //  return UIInterfaceOrientationMaskPortrait;
 //}
-//
-//- (void)moviePlayerWillEnterFullscreenNotification:(NSNotification*)notification {
-//  self.landscapeOnlyOrientation = YES;
-//}
-//
-//- (void)moviePlayerWillExitFullscreenNotification:(NSNotification*)notification {
-//  self.landscapeOnlyOrientation = NO;
-//}
+
+-(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  if (self.landscapeOnlyOrientation) {
+    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+  }
+  return UIInterfaceOrientationMaskPortrait;
+}
+
+- (void)moviePlayerWillEnterFullscreenNotification:(NSNotification*)notification {
+  self.landscapeOnlyOrientation = YES;
+}
+
+- (void)moviePlayerWillExitFullscreenNotification:(NSNotification*)notification {
+  self.landscapeOnlyOrientation = NO;
+}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

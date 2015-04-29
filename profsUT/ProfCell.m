@@ -86,6 +86,8 @@ static CGFloat leftPadding = 15.0;
       self.portraitView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"profCell.png"]];
       self.portraitView.frame = CGRectMake(10, 10, 80, 80);
       self.portraitView.layer.masksToBounds = YES;
+      self.portraitView.layer.borderColor = [UIColor blackColor].CGColor;
+      self.portraitView.layer.borderWidth = .5f;
       self.portraitView.layer.cornerRadius = self.portraitView.frame.size.width / 2.0;
 
     }
@@ -95,6 +97,8 @@ static CGFloat leftPadding = 15.0;
        sd_setImageWithURL:[NSURL URLWithString:imageURL]];
       self.portraitView.frame = CGRectMake(10, 10, 80, 80);
       self.portraitView.layer.masksToBounds = YES;
+      self.portraitView.layer.borderColor = [UIColor blackColor].CGColor;
+      self.portraitView.layer.borderWidth = .5f;
       self.portraitView.layer.cornerRadius = self.portraitView.frame.size.width / 2.0;
 
 
