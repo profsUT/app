@@ -52,7 +52,7 @@
   navBar.tintColor = [UIColor whiteColor];
   navBar.translucent = NO;
   navBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                                 NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Light" size:kNavFontSize]};
+                                 NSFontAttributeName:[UIFont fontWithName:@"Copse" size:kNavFontSize]};
   self.window.rootViewController = navController;
   
   [self.window makeKeyAndVisible];
