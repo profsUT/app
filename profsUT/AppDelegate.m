@@ -25,11 +25,12 @@
   // Tab bar stuff
   self.firstViewController = [[FeedVC alloc] init];
   self.secondViewController = [[ClassFeedVC alloc] init];
-//  self.thirdViewController = [[ProfVC alloc] init];
+  self.thirdViewController = [[VideoFeedVC alloc] init];
   
   NSArray *myViewControllers = [[NSArray alloc] initWithObjects:
                                 self.firstViewController,
-                                self.secondViewController, nil];
+                                self.secondViewController,
+                                self.thirdViewController, nil];
   
   
   // Initialize the tab bar controller

@@ -3,6 +3,7 @@
 #import "TabBarController.h"
 #import "FeedVC.h"
 #import "ClassFeedVC.h"
+#import "VideoFeedVC.h"
 #import "ProfVC.h"
 #import "MainNavigationController.h"
 
@@ -13,7 +14,7 @@
 
 @property (strong, nonatomic) FeedVC *firstViewController;
 @property (strong, nonatomic) ClassFeedVC *secondViewController;
-@property (strong, nonatomic) ProfVC *thirdViewController;
+@property (strong, nonatomic) VideoFeedVC *thirdViewController;
 
 
 @end

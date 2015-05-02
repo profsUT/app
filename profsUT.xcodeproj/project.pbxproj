@@ -20,6 +20,9 @@
 		1118DF0A1AEB2D9F001E54D7 /* MoviePlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118DF091AEB2D9F001E54D7 /* MoviePlayerController.m */; };
 		1118DF0C1AEC086A001E54D7 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1118DF0B1AEC086A001E54D7 /* playButton.png */; };
 		11CB35011AEE8CD40015C185 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CB35001AEE8CD40015C185 /* MainNavigationController.m */; };
+		11F277251AF47AC6009F5C72 /* VideoFeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F277241AF47AC6009F5C72 /* VideoFeedVC.m */; };
+		11F2772B1AF4860C009F5C72 /* videosIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F2772A1AF4860C009F5C72 /* videosIcon.png */; };
+		11F2772E1AF488C3009F5C72 /* VideoFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F2772D1AF488C3009F5C72 /* VideoFeedCell.m */; };
 		CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF341AAED392006D08EB /* FeedVC.m */; };
 		CD1FFF491AAED392006D08EB /* Professor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1FFF391AAED392006D08EB /* Professor.m */; };
 		CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */ = {isa = PBXBuildFile; fileRef = CD1FFF3C1AAED392006D08EB /* sample.mov */; };
@@ -72,6 +75,11 @@
 		11CB34FF1AEE8CD40015C185 /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
 		11CB35001AEE8CD40015C185 /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
 		11ED4E1F472339D1532BB583 /* Pods-profsUT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-profsUT.release.xcconfig"; path = "Pods/Target Support Files/Pods-profsUT/Pods-profsUT.release.xcconfig"; sourceTree = "<group>"; };
+		11F277231AF47AC6009F5C72 /* VideoFeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoFeedVC.h; sourceTree = "<group>"; };
+		11F277241AF47AC6009F5C72 /* VideoFeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = VideoFeedVC.m; sourceTree = "<group>"; tabWidth = 2; };
+		11F2772A1AF4860C009F5C72 /* videosIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = videosIcon.png; sourceTree = "<group>"; };
+		11F2772C1AF488C3009F5C72 /* VideoFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoFeedCell.h; sourceTree = "<group>"; };
+		11F2772D1AF488C3009F5C72 /* VideoFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = VideoFeedCell.m; sourceTree = "<group>"; tabWidth = 4; };
 		CD1FFF331AAED392006D08EB /* FeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedVC.h; sourceTree = "<group>"; };
 		CD1FFF341AAED392006D08EB /* FeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedVC.m; sourceTree = "<group>"; };
 		CD1FFF381AAED392006D08EB /* Professor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Professor.h; sourceTree = "<group>"; };
@@ -140,6 +148,7 @@
 		CD251C7B1AA2631B0062E2BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				11F2772A1AF4860C009F5C72 /* videosIcon.png */,
 				1118DF0B1AEC086A001E54D7 /* playButton.png */,
 				1115A6F31ADE48ED00AA3A59 /* courseIcon.png */,
 				1118DF041AEB2A4E001E54D7 /* courseIcon2.png */,
@@ -187,6 +196,10 @@
 				CD1FFF341AAED392006D08EB /* FeedVC.m */,
 				1115A6E21ADE0F3500AA3A59 /* ClassFeedVC.h */,
 				1115A6E31ADE0F3500AA3A59 /* ClassFeedVC.m */,
+				11F277231AF47AC6009F5C72 /* VideoFeedVC.h */,
+				11F277241AF47AC6009F5C72 /* VideoFeedVC.m */,
+				11F2772C1AF488C3009F5C72 /* VideoFeedCell.h */,
+				11F2772D1AF488C3009F5C72 /* VideoFeedCell.m */,
 				1115A6E81ADE174200AA3A59 /* CourseCell.h */,
 				1115A6E91ADE174200AA3A59 /* CourseCell.m */,
 				CD9E129C1AC27E96004363A6 /* ProfCell.h */,
@@ -343,6 +356,7 @@
 				1118DF071AEB2B12001E54D7 /* profIcon2.png in Resources */,
 				CD9E129B1AC278A6004363A6 /* quigley.png in Resources */,
 				1118DF031AEB2555001E54D7 /* profCell.png in Resources */,
+				11F2772B1AF4860C009F5C72 /* videosIcon.png in Resources */,
 				CD1FFF4B1AAED392006D08EB /* sample.mov in Resources */,
 				CD251C841AA26C5F0062E2BC /* settings.png in Resources */,
 				CD251C7D1AA2675C0062E2BC /* Copse.ttf in Resources */,
@@ -402,10 +416,12 @@
 			files = (
 				CD8074161AA25423007E334A /* AppDelegate.m in Sources */,
 				CD1FFF491AAED392006D08EB /* Professor.m in Sources */,
+				11F277251AF47AC6009F5C72 /* VideoFeedVC.m in Sources */,
 				1115A6ED1ADE2A3500AA3A59 /* TabBarController.m in Sources */,
 				CD251C7A1AA261170062E2BC /* UIColor+profsUT.m in Sources */,
 				1115A6E71ADE10B800AA3A59 /* Course.m in Sources */,
 				1118DF0A1AEB2D9F001E54D7 /* MoviePlayerController.m in Sources */,
+				11F2772E1AF488C3009F5C72 /* VideoFeedCell.m in Sources */,
 				CD1FFF451AAED392006D08EB /* FeedVC.m in Sources */,
 				CD9E129E1AC27E96004363A6 /* ProfCell.m in Sources */,
 				CD8074131AA25423007E334A /* main.m in Sources */,
